@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engotalk.WebApp", "EngotalkWebApp\Engotalk.WebApp.csproj", "{EE8C9C0B-A157-4714-8E81-DAA85288C64F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engotalk.Model", "Engotalk.Model\Engotalk.Model.csproj", "{486F8A4B-BA0C-439D-9953-4FB03A444392}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engotalk.ViewModel", "Engotalk.ViewModel\Engotalk.ViewModel.csproj", "{D812F384-CE77-4AAB-8F27-E5DE8C4A6F74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engotalk.Data", "Engotalk.Data\Engotalk.Data.csproj", "{9FEA4156-4B7C-46AE-967B-1DAF93F52AAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engotalk.BL", "Engotalk.BL\Engotalk.BL.csproj", "{FDD5D2B1-5D3B-435E-A21B-D49B57413C3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engotalk.IBL", "Engotalk.IBL\Engotalk.IBL.csproj", "{0AC9771A-3870-4967-ADC2-14E1BBA0291C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE8C9C0B-A157-4714-8E81-DAA85288C64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8C9C0B-A157-4714-8E81-DAA85288C64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8C9C0B-A157-4714-8E81-DAA85288C64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8C9C0B-A157-4714-8E81-DAA85288C64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{486F8A4B-BA0C-439D-9953-4FB03A444392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486F8A4B-BA0C-439D-9953-4FB03A444392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486F8A4B-BA0C-439D-9953-4FB03A444392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486F8A4B-BA0C-439D-9953-4FB03A444392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D812F384-CE77-4AAB-8F27-E5DE8C4A6F74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D812F384-CE77-4AAB-8F27-E5DE8C4A6F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D812F384-CE77-4AAB-8F27-E5DE8C4A6F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D812F384-CE77-4AAB-8F27-E5DE8C4A6F74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FEA4156-4B7C-46AE-967B-1DAF93F52AAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FEA4156-4B7C-46AE-967B-1DAF93F52AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FEA4156-4B7C-46AE-967B-1DAF93F52AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FEA4156-4B7C-46AE-967B-1DAF93F52AAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDD5D2B1-5D3B-435E-A21B-D49B57413C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD5D2B1-5D3B-435E-A21B-D49B57413C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD5D2B1-5D3B-435E-A21B-D49B57413C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD5D2B1-5D3B-435E-A21B-D49B57413C3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC9771A-3870-4967-ADC2-14E1BBA0291C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC9771A-3870-4967-ADC2-14E1BBA0291C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC9771A-3870-4967-ADC2-14E1BBA0291C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC9771A-3870-4967-ADC2-14E1BBA0291C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7E60CB1-2617-474E-BA44-1409C0BE3C68}
+	EndGlobalSection
+EndGlobal
