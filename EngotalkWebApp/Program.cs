@@ -1,7 +1,16 @@
+using Engotalk.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+var connectionString = builder.Configuration.GetConnectionString("DevConnection");
+
+builder.Services.AddDbContext<EngotalkDbContext>(option =>
+option.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
 var app = builder.Build();
 
