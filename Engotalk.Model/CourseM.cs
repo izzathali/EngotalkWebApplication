@@ -14,14 +14,14 @@ namespace Engotalk.Model
         public int CourseId { get; set; }
         [Display(Name="Course Title")]
         public int CourseTitleId { get; set; }
-        public CourseTitleM courseTitle { get; set; }
+        public CourseTitleM? courseTitle { get; set; }
         public int UniversityDepartmentId { get; set; }
-        public UniversityDepartmentsM universityDepartments { get; set; }
+        public UniversityDepartmentsM? universityDepartments { get; set; }
         public decimal Band { get; set; }
         public decimal Cost { get; set; }
-        [Column(TypeName ="nvarchar(200)")]
-        [Display(Name ="Course Duration")]
-        public string CourseDuration { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        [Display(Name = "Course Duration")]
+        public string CourseDuration { get; set; } = String.Empty;
 
     }
 }

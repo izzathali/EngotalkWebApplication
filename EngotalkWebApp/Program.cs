@@ -1,4 +1,6 @@
+using Engotalk.BL;
 using Engotalk.Data;
+using Engotalk.IBL;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,10 +9,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
+builder.Services.AddMvc();
+
+
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IUniversityRepository, UniversityRepository>();
+
 var connectionString = builder.Configuration.GetConnectionString("DevConnection");
 
 builder.Services.AddDbContext<EngotalkDbContext>(option =>
-option.UseSqlServer(connectionString), ServiceLifetime.Transient);
+option.UseSqlServer(connectionString),ServiceLifetime.Transient);
 
 var app = builder.Build();
 

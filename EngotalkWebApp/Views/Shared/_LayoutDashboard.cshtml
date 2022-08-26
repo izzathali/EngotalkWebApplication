@@ -29,6 +29,17 @@
     <!-- summernote -->
     <link rel="stylesheet" href="~/assets/be/plugins/summernote/summernote-bs4.min.css">
 
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/assets/be/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/assets/be/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/assets/be/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/assets/be/dist/css/adminlte.min.css">
+
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
     <div class="wrapper">
@@ -46,12 +57,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
+           
             </ul>
 
             <!-- Right navbar links -->
@@ -78,64 +84,6 @@
                     </div>
                 </li>
 
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="~/assets/be/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="~/assets/be/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="~/assets/be/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -176,7 +124,7 @@
             <!-- Brand Logo -->
             <a href="#" class="brand-link text-black navbar-light">
                 <img src="~/assets/be/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">POS Web App</span>
+                <span class="brand-text font-weight-light">ENGOTALK </span>
             </a>
 
             <!-- Sidebar -->
@@ -218,26 +166,27 @@
                             </a>
 
                         </li>
+                       
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-address-book"></i>
+                                <i class="nav-icon fa fa-cube"></i>
                                 <p>
-                                    Contacts
+                                    Course
                                     <i class="fas fa-angle-left right"></i>
-                                    @*<span class="badge badge-info right">6</span>*@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-id-card	nav-icon"></i>
-                                        <p>Customers</p>
+                                    <a asp-controller="Course" asp-action="Create" class="nav-link">
+                                        <i class="fa fa-plus-circle	nav-icon"></i>
+                                        <p>Add Course</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-address-card nav-icon"></i>
-                                        <p>Suppliers</p>
+                                    <a asp-controller="Course" asp-action="Index" class="nav-link">
+                                        <i class="fa fa-file-pdf nav-icon"></i>
+                                        <p>Course Report</p>
                                     </a>
                                 </li>
 
@@ -249,81 +198,134 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-cube"></i>
                                 <p>
-                                    Product
+                                    University
                                     <i class="fas fa-angle-left right"></i>
-                                    @*<span class="badge badge-info right">6</span>*@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a asp-controller="University" asp-action="Create" class="nav-link">
                                         <i class="fa fa-plus-circle	nav-icon"></i>
-                                        <p>Add Product</p>
+                                        <p>Add University</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a asp-controller="University" asp-action="Index" class="nav-link">
                                         <i class="fa fa-file-pdf nav-icon"></i>
-                                        <p>Product Report</p>
+                                        <p>University Report</p>
                                     </a>
                                 </li>
 
 
                             </ul>
                         </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>
-                                    Stock
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-chevron-circle-right nav-icon"></i>
-                                        <p>Top Navigation</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-chevron-circle-right nav-icon"></i>
-                                        <p>Fixed Sidebar</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>
-                                    Sales
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-
-
                         
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-cube"></i>
+                                <p>
+                                    Univ's Department
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="UnivDepartment" asp-action="Create" class="nav-link">
+                                        <i class="fa fa-plus-circle	nav-icon"></i>
+                                        <p>Add Univ's Department</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="UnivDepartment" asp-action="Index" class="nav-link">
+                                        <i class="fa fa-file-pdf nav-icon"></i>
+                                        <p>Univ's Dept Report</p>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Course Title
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="CourseTitle" asp-action="Create" class="nav-link">
+                                        <i class="fa fa-plus-circle	nav-icon"></i>
+                                        <p>Add Course Title</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="CourseTitle" asp-action="Index" class="nav-link">
+                                        <i class="fa fa-file-pdf nav-icon"></i>
+                                        <p>Course Title Report</p>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Department
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="Department" asp-action="Create" class="nav-link">
+                                        <i class="fa fa-plus-circle	nav-icon"></i>
+                                        <p>Add Department</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Department" asp-action="Index" class="nav-link">
+                                        <i class="fa fa-file-pdf nav-icon"></i>
+                                        <p>Department Report</p>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Country
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="Country" asp-action="Create" class="nav-link">
+                                        <i class="fa fa-plus-circle	nav-icon"></i>
+                                        <p>Add Country</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Country" asp-action="Index" class="nav-link">
+                                        <i class="fa fa-file-pdf nav-icon"></i>
+                                        <p>Country Report</p>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+
+
 
                     </ul>
                 </nav>
@@ -354,9 +356,8 @@
             <!-- Control sidebar content goes here -->
         </aside>
         <!-- /.control-sidebar -->
-
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
         @*<script src="~/js/site.js" asp-append-version="true"></script>*@
 
 
@@ -391,15 +392,49 @@
         <!-- AdminLTE App -->
         <script src="~/assets/be/dist/js/adminlte.js"></script>
 
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="~/assets/be/dist/js/pages/dashboard.js"></script>
+
+        <!-- DataTables  & Plugins -->
+        <script src="~/assets/be/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/assets/be/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="~/assets/be/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="~/assets/be/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="~/assets/be/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="~/assets/be/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <script src="~/assets/be/plugins/jszip/jszip.min.js"></script>
+        <script src="~/assets/be/plugins/pdfmake/pdfmake.min.js"></script>
+        <script src="~/assets/be/plugins/pdfmake/vfs_fonts.js"></script>
+        <script src="~/assets/be/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+        <script src="~/assets/be/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+        <script src="~/assets/be/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
         <!-- AdminLTE for demo purposes -->
         @*<script src="~/assets/be/dist/js/demo.js"></script>*@
 
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="~/assets/be/dist/js/pages/dashboard.js"></script>
+
 
 
         @await RenderSectionAsync("Scripts", required: false)
     </div>
 
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 </body>
 </html>

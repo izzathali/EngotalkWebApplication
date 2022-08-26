@@ -14,8 +14,15 @@ namespace Engotalk.Model
         public int UniversityId { get; set; }
         [Column(TypeName ="nvarchar(500)")]
         public string University { get; set; } = string.Empty;
-        public CountryM country { get; set; }
+        public CountryM? country { get; set; }
         public int CountryId { get; set; }
+        public string UnivWithCountry
+        {
+            get
+            {
+                return country.CountryName + " -- " + this.University.ToString();
+            }
+        }
 
         public int Rank { get; set; }
 

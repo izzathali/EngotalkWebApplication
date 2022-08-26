@@ -12,10 +12,17 @@ namespace Engotalk.Model
         [Key]
         public int UniversityDepartmentId { get; set; }
         public int UniversityId { get; set; }
-        public UniversityM university { get; set; }
+        public UniversityM? university { get; set; }
 
         public int DepartmentId { get; set; }
-        public DepartmentM department { get; set; }
+        public DepartmentM? department { get; set; }
+        public string UnivDept
+        {
+            get
+            {
+                return university.UnivWithCountry + " -- " + this.department.Department;
+            }
+        }
 
 
     }

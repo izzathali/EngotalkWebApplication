@@ -1,0 +1,117 @@
+﻿@using Engotalk.Model
+@model CourseM
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">General Form</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content ">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-lightblue">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Course</h3>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <div class="col-md-6">
+
+                        <!-- form start -->
+                        <form asp-action="Create">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Course Title</label>
+                                    <span asp-validation-for="CourseTitleId" class="text-danger"></span>
+
+                                    <select asp-for="CourseTitleId" type="text" class="form-control" asp-items="ViewBag.CourseTitleId"></select>
+                                </div>
+
+                                @*<div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Country Of University</label>
+                                    <span asp-validation-for="" class="text-danger"></span>
+
+                                    <select asp-for="UniversityDepartmentId" type="text" class="form-control" asp-items="ViewBag.UniversityDepartmentId"></select>
+                                </div>*@
+
+
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Univ's' Department</label>
+                                    <span asp-validation-for="UniversityDepartmentId" class="text-danger"></span>
+
+                                    <select asp-for="UniversityDepartmentId" type="text" class="form-control" asp-items="ViewBag.UniversityDepartmentId"></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Band</label>
+                                    <span asp-validation-for="Band" class="text-danger"></span>
+
+                                    <input asp-for="Band"
+                                           type="number" class="form-control" placeholder="Band">
+                                </div>
+
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Fee</label>
+                                    <span asp-validation-for="Cost" class="text-danger"></span>
+
+                                    <input asp-for="Cost"
+                                           type="number" class="form-control" placeholder="Fee">
+                                </div>
+
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Course Duration</label>
+                                    <span asp-validation-for="CourseDuration" class="text-danger"></span>
+
+                                    <input asp-for="CourseDuration"
+                                           type="text" class="form-control" id="exampleInputEmail1" placeholder="Course Duration">
+                                </div>
+
+
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">
+                                    <span class="tf-icons bx bxs-save"></span>&nbsp; Save
+                                </button>
+                                <button class="btn btn-info" asp-action="Index">
+                                    <span class="tf-icons bx bx-list-ul"></span>&nbsp; View List
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
