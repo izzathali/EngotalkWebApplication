@@ -61,35 +61,23 @@
                                         {
                                             <tr>
                                                 <td>
-                                                    @if (@item.courseTitle != null)
-                                                    {
-                                                        @item.courseTitle.CourseTitle
-                                                    }
+                                                    @item.Course
                                                 </td>
                                                 <td>
-                                                    @if (@item.universityDepartments != null)
-                                                    {
-                                                        @item.universityDepartments.department.Department
-                                                    }
+                                                    @item.department.Department
                                                 </td>
                                                 <td>
-                                                    @if (@item.universityDepartments != null)
-                                                    {
-                                                        @item.universityDepartments.university.University
-                                                    }
+                                                    @item.department.university.University
                                                 </td>
                                                 <td>
-                                                    @if (@item.universityDepartments != null)
-                                                    {
-                                                        @item.universityDepartments.university.country.CountryName
-                                                    }
+                                                    @item.department.university.country.CountryName
                                                 </td>
                                                 <td>@item.Band</td>
-                                                <td>@item.Cost</td>
+                                                <td>$@item.Cost</td>
                                                 <td>@item.CourseDuration</td>
                                                 <td>
-                                                    <a asp-action="Edit" asp-route-id="@item.UniversityDepartmentId"><i class="fas fa-edit me-1"></i> Edit</a> |
-                                                    <a asp-action="Delete" asp-route-id="@item.UniversityDepartmentId"><i class="fas fa-trash me-1"></i> Delete</a>
+                                                    <a asp-action="Edit" asp-route-id="@item.CourseId"><i class="fas fa-edit me-1"></i> Edit</a> |
+                                                    <a asp-action="Delete" asp-route-id="@item.CourseId"><i class="fas fa-trash me-1"></i> Delete</a>
                                                 </td>
                                             </tr>
 

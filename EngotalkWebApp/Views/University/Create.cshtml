@@ -32,7 +32,7 @@
                 <!-- general form elements -->
                 <div class="card card-lightblue">
                     <div class="card-header">
-                        <h3 class="card-title">Add Unviersity</h3>
+                        <h3 class="card-title">Add Unviersity / College</h3>
                     </div>
                     <!-- /.card-header -->
 
@@ -41,13 +41,27 @@
                         <!-- form start -->
                         <form asp-action="Create">
                             <div class="card-body">
+
                                 <div class="form-group">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <label for="exampleInputEmail1">Unviersity</label>
+                                    <label for="exampleInputEmail1">University / College Type</label>
+                                    <span asp-validation-for="UniversityType" class="text-danger"></span>
+
+                                    <select asp-for="UniversityType" type="text" class="form-control">
+                                        <option disabled selected > --SELECT-- </option>
+                                        <option>University</option>
+                                        <option>College</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Unviersity / College</label>
                                     <span asp-validation-for="University" class="text-danger"></span>
 
                                     <input asp-for="University"
-                                           type="text" class="form-control" id="exampleInputEmail1" placeholder="Unviersity">
+                                           type="text" class="form-control" id="exampleInputEmail1" placeholder="Unviersity / College">
                                 </div>
 
                                 <div class="form-group">
@@ -55,7 +69,10 @@
                                     <label for="exampleInputEmail1">Country</label>
                                     <span asp-validation-for="CountryId" class="text-danger"></span>
 
-                                    <select asp-for="CountryId" type="text" class="form-control" asp-items="ViewBag.CountryId"></select>
+                                    <select asp-for="CountryId" type="text" class="form-control" asp-items="ViewBag.CountryId">
+                                         <option disabled selected > --SELECT-- </option>
+
+                                    </select>
                                 </div>
 
                                 <div class="form-group">

@@ -9,11 +9,15 @@ namespace Engotalk.WebApp.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseRepository iCourseRepository;
+        private readonly ICountryRepository iCountryRepository;
         private readonly IUniversityRepository iUniversityRepository;
-        public CourseController(ICourseRepository iCourseRepository, IUniversityRepository iUniversityRepository)
+        private readonly IDepartmentRepository iDepartmentRepository;
+        public CourseController(ICourseRepository iCourseRepository, IUniversityRepository iUniversityRepository, ICountryRepository iCountryRepository, IDepartmentRepository iDepartmentRepository)
         {
             this.iCourseRepository = iCourseRepository;
             this.iUniversityRepository = iUniversityRepository;
+            this.iCountryRepository = iCountryRepository;
+            this.iDepartmentRepository = iDepartmentRepository;
         }
 
         // GET: CourseController
@@ -29,22 +33,36 @@ namespace Engotalk.WebApp.Controllers
         {
             return View();
         }
-
+    
         // GET: CourseController/Create
         public async Task<ActionResult> Create()
         {
-            ViewData["CourseTitleId"] = new SelectList(await iCourseRepository.GetCourseTitles(), "CourseTitleId", "CourseTitle");
-            ViewData["UniversityDepartmentId"] = new SelectList(await iUniversityRepository.GetUniversityDepartmentsAsync(), "UniversityDepartmentId", "UnivDept");
+            ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
+            //ViewData["UniversityId"] = new SelectList(await iUniversityRepository.GetUniversities(), "UniversityId", "University");
+            //ViewData["DepartmentId"] = new SelectList(await iDepartmentRepository.GetDepartments(), "DepartmentId", "Department");
 
             return View();
         }
+        public async Task<JsonResult> LoadUniversities(int id)
+        {
+            var universities = await iUniversityRepository.GetUniversitiesByCountryId(id);
+
+            return Json(new SelectList(universities, "UniversityId", "University"));
+        }
+        public async Task<JsonResult> LoadDepartments(int id)
+        {
+            var departments = await iDepartmentRepository.GetDepartmentsByUnivId(id);
+
+            return Json(new SelectList(departments, "DepartmentId", "Department"));
+        }
+    
 
         // POST: CourseController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind("CourseId,CourseTitleId,UniversityDepartmentId,Band,Cost,CourseDuration")] CourseM courseM)
+        public async Task<ActionResult> Create([Bind("Course,DepartmentId,Band,Cost,CourseDuration,IELTSRequirment,ListeningBand,ReadingBand,WritingBand,SpeakingBand")] CourseM courseM)
         {
-            if (courseM.CourseTitleId > 0 && courseM.UniversityDepartmentId > 0 && !String.IsNullOrEmpty(courseM.Band.ToString()) && !String.IsNullOrEmpty(courseM.Cost.ToString()) && !String.IsNullOrEmpty(courseM.CourseDuration))
+            if (courseM.DepartmentId > 0 && !String.IsNullOrEmpty(courseM.Band.ToString()) && !String.IsNullOrEmpty(courseM.Cost.ToString()) && !String.IsNullOrEmpty(courseM.CourseDuration))
             {
                 try
                 {
@@ -54,13 +72,11 @@ namespace Engotalk.WebApp.Controllers
                 catch
                 {
                 }
-
-
             }
+            ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
+            //ViewData["UniversityId"] = new SelectList(await iUniversityRepository.GetUniversities(), "UniversityId", "University");
+            //ViewData["DepartmentId"] = new SelectList(await iDepartmentRepository.GetDepartments(), "DepartmentId", "Department");
 
-            ViewData["CourseTitleId"] = new SelectList(await iCourseRepository.GetCourseTitles(), "CourseTitleId", "CourseTitle");
-            ViewData["UniversityDepartmentId"] = new SelectList(await iUniversityRepository.GetUniversityDepartmentsAsync(), "UniversityDepartmentId", "UnivDept");
-            
             return View();
         }
 

@@ -1,6 +1,7 @@
 ﻿using Engotalk.Data;
 using Engotalk.IBL;
 using Engotalk.Model;
+using Engotalk.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,28 @@ namespace Engotalk.BL
         public async Task<int> AddUniversity(UniversityM university)
         {
             db.Universities.Add(university);
-
             return await db.SaveChangesAsync();
         }
 
-        public async Task<int> AddUniversityDepartments(UniversityDepartmentsM universityDepartments)
+        public async Task<IEnumerable<CollegeVM>> GetCollegesByCountryIdAndCourse(int cid, string course)
         {
-            db.UniversityDepartments.Add(universityDepartments);
-            return await db.SaveChangesAsync();
+            var model = await db.Courses.Where(i => i.department.university.CountryId == cid && i.Course == course && i.department.university.UniversityType == "College")
+              .Select(g => new CollegeVM
+              {
+                  College = g.department.university.University,
+                  Band = g.Band,
+                  Rank = g.department.university.Rank,
+                  Cost = g.Cost,
+                  Duration = g.CourseDuration,
+                  IELTSRequirment = g.IELTSRequirment,
+                  ListeningBand = g.ListeningBand,
+                  ReadingBand = g.ReadingBand ,
+                  WritingBand = g.WritingBand,
+                  SpeakingBand = g.SpeakingBand
+              })
+              .ToListAsync();
+
+            return model;
         }
 
         public async Task<IEnumerable<UniversityM>> GetUniversities()
@@ -38,23 +53,33 @@ namespace Engotalk.BL
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<UniversityDepartmentsM>> GetUniversityDepartmentsAsync()
+        public async Task<IEnumerable<UniversityM>> GetUniversitiesByCountryId(int cid)
         {
-            return await db.UniversityDepartments
-                .Include(m => m.university)
-                .Include(n =>n.department)
-                .Include(u => u.university.country)
-                .ToListAsync();
+            return await db.Universities.Where(z => z.CountryId == cid).ToListAsync();
         }
-        public List<UniversityDepartmentsM> GetUniversityDepartments()
-        {
-            //return db.UniversityDepartments
-            //   .Include(m => m.university)
-            //   .Include(n => n.department)
-            //   .Include(u => u.university.country)
-            //   .GroupBy(i => new { i.university.country, i.university.University, i.department.Department }).ToList();
 
-            return new List<UniversityDepartmentsM>();
+        public async Task<IEnumerable<UniversityVM>> GetUniversitiesByCountryIdAndCourse(int cid, string course)
+        {
+            var model = await db.Courses.Where(i => i.department.university.CountryId == cid && i.Course == course && i.department.university.UniversityType == "University")
+               .Select(g => new UniversityVM
+               {
+                   University = g.department.university.University,
+                   Band = g.Band,
+                   Rank = g.department.university.Rank,
+                   Cost = g.Cost,
+                   Duration = g.CourseDuration
+               })
+               .ToListAsync();
+
+            return model;
+        }
+
+        public async Task<IEnumerable<UniversityM>> GetUniversitiesOrderByLastAdded()
+        {
+            return await db.Universities
+               .Include(m => m.country)
+               .OrderByDescending(u =>u.UniversityId)
+               .ToListAsync();
         }
     }
 }

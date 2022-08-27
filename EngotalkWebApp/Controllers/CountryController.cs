@@ -16,7 +16,7 @@ namespace Engotalk.WebApp.Controllers
         public async Task<ActionResult> Index()
         {
 
-            return View(await iCountryRepository.GetCountries());
+            return View(await iCountryRepository.GetCountriesAsync());
         }
 
         // GET: CountryController/Details/5

@@ -1,4 +1,5 @@
 ﻿using Engotalk.Model;
+using Engotalk.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,9 @@ namespace Engotalk.IBL
 {
     public interface ICourseRepository
     {
-        public Task<int> AddCourseTitle(CourseTitleM courseTitle);
         public Task<int> AddCourse(CourseM course);
-        public Task<IEnumerable<CourseTitleM>> GetCourseTitles();
         public Task<IEnumerable<CourseM>> GetCourses();
+        public Task<IEnumerable<DepartmentVM>> GetDepartmentWithCourse(int CountryId);
 
     }
 }

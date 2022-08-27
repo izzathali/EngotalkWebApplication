@@ -17,9 +17,7 @@ namespace Engotalk.Data
 
         public DbSet<CountryM> Countries { get; set; }
         public DbSet<DepartmentM> Departments { get; set; }
-        public DbSet<CourseTitleM> CourseTitles { get; set; }
         public DbSet<UniversityM> Universities { get; set; }
-        public DbSet<UniversityDepartmentsM> UniversityDepartments { get; set; }
         public DbSet<CourseM> Courses { get; set; }
 
     }

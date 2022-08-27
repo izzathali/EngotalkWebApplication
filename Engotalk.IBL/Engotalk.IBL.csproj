@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Engotalk.Model\Engotalk.Model.csproj" />
+    <ProjectReference Include="..\Engotalk.ViewModel\Engotalk.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

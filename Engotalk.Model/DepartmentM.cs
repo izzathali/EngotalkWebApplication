@@ -15,5 +15,7 @@ namespace Engotalk.Model
         [Column(TypeName="nvarchar(250)")]
         [Display(Name="Department")]
         public string Department { get; set; } = string.Empty;
+        public int UniversityId { get; set; }
+        public UniversityM? university { get; set; }
     }
 }

@@ -24,7 +24,12 @@ namespace Engotalk.BL
             return await db.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<CountryM>> GetCountries()
+        public IEnumerable<CountryM> GetCountries()
+        {
+            return db.Countries.ToList();
+        }
+
+        public async Task<IEnumerable<CountryM>> GetCountriesAsync()
         {
             return await db.Countries.ToListAsync();
         }

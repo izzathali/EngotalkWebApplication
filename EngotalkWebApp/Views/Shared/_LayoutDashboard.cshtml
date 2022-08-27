@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - POS.WebApp</title>
+    <title>@ViewData["Title"] - ENGOTALK</title>
     @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/POS.WebApp.styles.css" asp-append-version="true" />*@
@@ -57,7 +57,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-           
+
             </ul>
 
             <!-- Right navbar links -->
@@ -166,27 +166,26 @@
                             </a>
 
                         </li>
-                       
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-cube"></i>
+                                <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Course
+                                    Country
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-controller="Course" asp-action="Create" class="nav-link">
+                                    <a asp-controller="Country" asp-action="Create" class="nav-link">
                                         <i class="fa fa-plus-circle	nav-icon"></i>
-                                        <p>Add Course</p>
+                                        <p>Add Country</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-controller="Course" asp-action="Index" class="nav-link">
+                                    <a asp-controller="Country" asp-action="Index" class="nav-link">
                                         <i class="fa fa-file-pdf nav-icon"></i>
-                                        <p>Course Report</p>
+                                        <p>Country Report</p>
                                     </a>
                                 </li>
 
@@ -198,7 +197,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-cube"></i>
                                 <p>
-                                    University
+                                    University / College
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -213,58 +212,6 @@
                                     <a asp-controller="University" asp-action="Index" class="nav-link">
                                         <i class="fa fa-file-pdf nav-icon"></i>
                                         <p>University Report</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-cube"></i>
-                                <p>
-                                    Univ's Department
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-controller="UnivDepartment" asp-action="Create" class="nav-link">
-                                        <i class="fa fa-plus-circle	nav-icon"></i>
-                                        <p>Add Univ's Department</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-controller="UnivDepartment" asp-action="Index" class="nav-link">
-                                        <i class="fa fa-file-pdf nav-icon"></i>
-                                        <p>Univ's Dept Report</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>
-                                    Course Title
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-controller="CourseTitle" asp-action="Create" class="nav-link">
-                                        <i class="fa fa-plus-circle	nav-icon"></i>
-                                        <p>Add Course Title</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-controller="CourseTitle" asp-action="Index" class="nav-link">
-                                        <i class="fa fa-file-pdf nav-icon"></i>
-                                        <p>Course Title Report</p>
                                     </a>
                                 </li>
 
@@ -298,32 +245,32 @@
                             </ul>
                         </li>
 
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                                <i class="nav-icon fa fa-cube"></i>
                                 <p>
-                                    Country
+                                    Course
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-controller="Country" asp-action="Create" class="nav-link">
+                                    <a asp-controller="Course" asp-action="Create" class="nav-link">
                                         <i class="fa fa-plus-circle	nav-icon"></i>
-                                        <p>Add Country</p>
+                                        <p>Add Course</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-controller="Country" asp-action="Index" class="nav-link">
+                                    <a asp-controller="Course" asp-action="Index" class="nav-link">
                                         <i class="fa fa-file-pdf nav-icon"></i>
-                                        <p>Country Report</p>
+                                        <p>Course Report</p>
                                     </a>
                                 </li>
 
 
                             </ul>
                         </li>
-
 
 
 
@@ -348,7 +295,7 @@
             <strong>Copyright &copy; 2022 <a href="#">   </a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0
+               @* <b>Version</b> 1.0*@
             </div>
         </footer>
         <!-- Control Sidebar -->

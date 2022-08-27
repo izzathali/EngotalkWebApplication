@@ -10,6 +10,7 @@ namespace Engotalk.IBL
     public interface ICountryRepository
     {
         public Task<int> AddCountry(CountryM country);
-        public Task<IEnumerable<CountryM>> GetCountries();
+        public Task<IEnumerable<CountryM>> GetCountriesAsync();
+        public IEnumerable<CountryM> GetCountries();
     }
 }

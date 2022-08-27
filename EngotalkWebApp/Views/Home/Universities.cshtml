@@ -1,0 +1,126 @@
+﻿@using Engotalk.ViewModel
+@{
+    ViewData["Title"] = "Department";
+    IEnumerable<UniversityVM> universitiesVM = ViewBag.Universities as IEnumerable<UniversityVM>;
+    IEnumerable<CollegeVM> collegeVM = ViewBag.colleges as IEnumerable<CollegeVM>;
+}
+<!--::review_part start::-->
+<section class="special_cource padding_top">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5">
+                <div class="section_tittle text-center">
+                    <p>@ViewBag.Course</p>
+                    <h2>Universities</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Start Align Area -->
+<div class="whole-wrap">
+    <div class="container box_1170">
+
+        <div class="section-top-border">
+            <div class="progress-table-wrap">
+                <div class="progress-table">
+                    <div class="table-head">
+                        <div class="serial">#</div>
+                        <div class="country">Institution</div>
+                        <div class="visit">IELTS Band</div>
+                        <div class="visit">Ranking (QS)</div>
+                        <div class="visit">Cost</div>
+                        <div class="visit">Duration</div>
+                    </div>
+
+                    @if (universitiesVM != null)
+                    {
+                        int no = 1;
+                        @foreach (var item in @universitiesVM)
+                        {
+                            <div class="table-row">
+                                <div class="serial">@no</div>
+                                <div class="country"> @item.University</div>
+                                <div class="visit">@item.Band</div>
+                                <div class="visit">@item.Rank</div>
+                                <div class="visit">$@item.Cost</div>
+                                <div class="visit">@item.Duration</div>
+
+                            </div>
+                            no++;
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- End Align Area -->
+
+<section class="special_cource">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5">
+                <div class="section_tittle text-center">
+                    <h2>Colleges</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Start Align Area -->
+<div class="whole-wrap">
+    <div class="container box_1170">
+
+        <div class="section-top-border">
+            <div class="progress-table-wrap">
+                <div class="progress-table">
+                    <div class="table-head">
+                        <div class="serial">#</div>
+                        <div class="country">Univ & College</div>
+                        <div class="visit">IELTS Requirement</div>
+                        <div class="visit">Total IELTS Score</div>
+                        <div class="visit">Listening</div>
+                        <div class="visit">Reading</div>
+                        <div class="visit">Writing</div>
+                        <div class="visit">Speaking</div>
+                        <div class="visit">Cost</div>
+                        <div class="visit">Duration</div>
+                    </div>
+
+                    @if (collegeVM != null)
+                    {
+                        int no = 1;
+                        @foreach (var item in @collegeVM)
+                        {
+                            <div class="table-row">
+                                <div class="serial">@no</div>
+                                <div class="country"> @item.College</div>
+                                <div class="visit">@item.IELTSRequirment</div>
+                                <div class="visit">@item.Band</div>
+                                <div class="visit">@item.ListeningBand</div>
+                                <div class="visit">@item.ReadingBand</div>
+                                <div class="visit">@item.WritingBand</div>
+                                <div class="visit">@item.SpeakingBand</div>
+                                <div class="visit">$@item.Cost</div>
+                                <div class="visit">@item.Duration</div>
+
+                            </div>
+                            no++;
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- End Align Area -->

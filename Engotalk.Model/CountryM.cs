@@ -15,5 +15,6 @@ namespace Engotalk.Model
         [Column(TypeName = "nvarchar(150)")]
         [Display(Name = "Country ")]
         public string CountryName { get; set; } = string.Empty;
+        public ICollection<UniversityM> universities { get; set; }
     }
 }

@@ -19,8 +19,8 @@ namespace Engotalk.WebApp.Controllers
         // GET: UniversityController
         public async Task<ActionResult> Index()
         {
-            
-            return View(await iUniversityRepository.GetUniversities());
+
+            return View(await iUniversityRepository.GetUniversitiesOrderByLastAdded());
         }
 
         // GET: UniversityController/Details/5
@@ -32,7 +32,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: UniversityController/Create
         public async Task<ActionResult> Create()
         {
-            ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountries(), "CountryId", "CountryName");
+            ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
 
             return View();
         }
@@ -40,24 +40,23 @@ namespace Engotalk.WebApp.Controllers
         // POST: UniversityController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind("UniversityId,University,CountryId,Rank")] UniversityM universityM)
+        public async Task<ActionResult> Create([Bind("UniversityId,UniversityType,University,CountryId,Rank")] UniversityM universityM)
         {
             try
             {
-                if (!String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
+                if (universityM.UniversityType != "--SELECT--" && !String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
                 {
                     await iUniversityRepository.AddUniversity(universityM);
                     return RedirectToAction(nameof(Index));
                 }
 
-                ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountries(), "CountryId", "CountryName");
-                return View();
             }
             catch
             {
-                ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountries(), "CountryId", "CountryName");
-                return View();
             }
+            ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
+
+            return View();
         }
 
         // GET: UniversityController/Edit/5

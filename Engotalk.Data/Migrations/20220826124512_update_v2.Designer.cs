@@ -3,6 +3,7 @@ using Engotalk.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Engotalk.Data.Migrations
 {
     [DbContext(typeof(EngotalkDbContext))]
-    partial class EngotalkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220826124512_update_v2")]
+    partial class update_v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,44 +48,46 @@ namespace Engotalk.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"), 1L, 1);
 
-                    b.Property<string>("Band")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Band")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Course")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CourseDuration")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int>("CourseTitleId")
+                        .HasColumnType("int");
+
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("IELTSRequirment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ListeningBand")
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("ReadingBand")
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("SpeakingBand")
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("WritingBand")
-                        .HasColumnType("nvarchar(20)");
-
                     b.HasKey("CourseId");
+
+                    b.HasIndex("CourseTitleId");
 
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("Engotalk.Model.CourseTitleM", b =>
+                {
+                    b.Property<int>("CourseTitleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseTitleId"), 1L, 1);
+
+                    b.Property<string>("CourseTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(400)");
+
+                    b.HasKey("CourseTitleId");
+
+                    b.ToTable("CourseTitles");
                 });
 
             modelBuilder.Entity("Engotalk.Model.DepartmentM", b =>
@@ -124,10 +128,6 @@ namespace Engotalk.Data.Migrations
 
                     b.Property<string>("University")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UniversityType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(500)");
 
                     b.HasKey("UniversityId");
@@ -139,11 +139,19 @@ namespace Engotalk.Data.Migrations
 
             modelBuilder.Entity("Engotalk.Model.CourseM", b =>
                 {
+                    b.HasOne("Engotalk.Model.CourseTitleM", "courseTitle")
+                        .WithMany()
+                        .HasForeignKey("CourseTitleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Engotalk.Model.DepartmentM", "department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("courseTitle");
 
                     b.Navigation("department");
                 });
@@ -151,7 +159,7 @@ namespace Engotalk.Data.Migrations
             modelBuilder.Entity("Engotalk.Model.DepartmentM", b =>
                 {
                     b.HasOne("Engotalk.Model.UniversityM", "university")
-                        .WithMany("departments")
+                        .WithMany()
                         .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -162,22 +170,12 @@ namespace Engotalk.Data.Migrations
             modelBuilder.Entity("Engotalk.Model.UniversityM", b =>
                 {
                     b.HasOne("Engotalk.Model.CountryM", "country")
-                        .WithMany("universities")
+                        .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("country");
-                });
-
-            modelBuilder.Entity("Engotalk.Model.CountryM", b =>
-                {
-                    b.Navigation("universities");
-                });
-
-            modelBuilder.Entity("Engotalk.Model.UniversityM", b =>
-                {
-                    b.Navigation("departments");
                 });
 #pragma warning restore 612, 618
         }

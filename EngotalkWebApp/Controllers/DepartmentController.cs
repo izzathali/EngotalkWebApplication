@@ -2,15 +2,18 @@
 using Engotalk.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Engotalk.WebApp.Controllers
 {
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository iDepartmentRepository;
-        public DepartmentController(IDepartmentRepository iDepartmentRepository)
+        private readonly IUniversityRepository iUniversityRepository;
+        public DepartmentController(IDepartmentRepository iDepartmentRepository, IUniversityRepository iUniversityRepository)
         {
             this.iDepartmentRepository = iDepartmentRepository;
+            this.iUniversityRepository = iUniversityRepository;
         }
 
         // GET: DepartmentController
@@ -27,19 +30,21 @@ namespace Engotalk.WebApp.Controllers
         }
 
         // GET: DepartmentController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            ViewData["UniversityId"] = new SelectList(await iUniversityRepository.GetUniversities(), "UniversityId", "University");
+
             return View();
         }
 
         // POST: DepartmentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind("DepartmentId,Department")] DepartmentM departmentM)
+        public async Task<ActionResult> Create([Bind("DepartmentId,Department,UniversityId")] DepartmentM departmentM)
         {
             try
             {
-                if (!string.IsNullOrEmpty(departmentM.Department))
+                if (!string.IsNullOrEmpty(departmentM.Department) && departmentM.UniversityId > 0)
                 {
                     await iDepartmentRepository.AddDepartment(departmentM);
                     return RedirectToAction(nameof(Index));

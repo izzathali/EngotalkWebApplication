@@ -27,7 +27,15 @@ namespace Engotalk.BL
 
         public async Task<IEnumerable<DepartmentM>> GetDepartments()
         {
-            return await db.Departments.ToListAsync();
+            return await db.Departments
+                .Include(m => m.university)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<DepartmentM>> GetDepartmentsByUnivId(int univid)
+        {
+            return await db.Departments.Where(i => i.UniversityId == univid).ToListAsync();
+
         }
     }
 }
