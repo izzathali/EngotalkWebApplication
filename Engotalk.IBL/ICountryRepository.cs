@@ -11,6 +11,9 @@ namespace Engotalk.IBL
     {
         public Task<int> AddCountry(CountryM country);
         public Task<IEnumerable<CountryM>> GetCountriesAsync();
+        public Task<CountryM> GetCountryByCountryId(int id);
         public IEnumerable<CountryM> GetCountries();
+        public Task<int> UpdateCountry(CountryM country);
+        public Task<int> DeleteCountry(int id);
     }
 }

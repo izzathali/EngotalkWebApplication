@@ -18,7 +18,7 @@ namespace Engotalk.Model
         public CountryM? country { get; set; }
         public int CountryId { get; set; }
         public int Rank { get; set; }
-
+        public bool IsDeleted { get; set; }
         public ICollection<DepartmentM> departments { get; set; }
 
     }

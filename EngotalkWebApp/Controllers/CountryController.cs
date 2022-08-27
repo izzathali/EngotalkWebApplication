@@ -36,58 +36,75 @@ namespace Engotalk.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind("CountryId,CountryName")] CountryM country)
         {
+
             try
             {
-                await iCountryRepository.AddCountry(country);
+                if (!String.IsNullOrEmpty(country.CountryName))
+                {
+                    await iCountryRepository.AddCountry(country);
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
-                return View();
             }
+
+            return View();
         }
 
         // GET: CountryController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var category = await iCountryRepository.GetCountryByCountryId(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
         }
 
         // POST: CountryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, [Bind("CountryId,CountryName")] CountryM country)
         {
             try
             {
+                if (!String.IsNullOrEmpty(country.CountryName))
+                {
+                    await iCountryRepository.UpdateCountry(country);
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch
+            {
+            }
+            return View(country);
+        }
+
+        // GET: CountryController/Delete/5
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                await iCountryRepository.DeleteCountry(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
-        }
-
-        // GET: CountryController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: CountryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
     }
 }

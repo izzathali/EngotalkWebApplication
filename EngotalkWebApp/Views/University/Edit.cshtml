@@ -1,0 +1,108 @@
+﻿@using Engotalk.Model
+@model UniversityM
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">General Form</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content ">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-lightblue">
+                    <div class="card-header">
+                        <h3 class="card-title">Update Unviersity / College</h3>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <div class="col-md-6">
+
+                        <!-- form start -->
+                        <form asp-action="Edit">
+                             <input type="hidden" asp-for="UniversityId" />
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">University / College Type</label>
+                                    <span asp-validation-for="UniversityType" class="text-danger"></span>
+
+                                    <select asp-for="UniversityType" type="text" class="form-control">
+                                        <option disabled selected > --SELECT-- </option>
+                                        <option>University</option>
+                                        <option>College</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Unviersity / College</label>
+                                    <span asp-validation-for="University" class="text-danger"></span>
+
+                                    <input asp-for="University"
+                                           type="text" class="form-control" id="exampleInputEmail1" placeholder="Unviersity / College">
+                                </div>
+
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Country</label>
+                                    <span asp-validation-for="CountryId" class="text-danger"></span>
+
+                                    <select asp-for="CountryId" type="text" class="form-control" asp-items="ViewBag.CountryId">
+                                         <option disabled selected > --SELECT-- </option>
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <label for="exampleInputEmail1">Rank</label>
+                                    <span asp-validation-for="Rank" class="text-danger"></span>
+
+                                    <input asp-for="Rank"
+                                           type="number" class="form-control" placeholder="Rank">
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">
+                                    <span class="tf-icons bx bxs-save"></span>&nbsp; Update
+                                </button>
+                                <button class="btn btn-info" asp-action="Index">
+                                    <span class="tf-icons bx bx-list-ul"></span>&nbsp; View List
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>

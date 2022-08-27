@@ -1,7 +1,7 @@
 ﻿@using Engotalk.Model
 @model CountryM
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
@@ -32,14 +32,15 @@
                 <!-- general form elements -->
                 <div class="card card-lightblue">
                     <div class="card-header">
-                        <h3 class="card-title">Add Country</h3>
+                        <h3 class="card-title">Update Country</h3>
                     </div>
                     <!-- /.card-header -->
 
                     <div class="col-md-6">
 
                         <!-- form start -->
-                        <form asp-action="Create">
+                        <form asp-action="Edit">
+                            <input type="hidden" asp-for="CountryId" />
                             <div class="card-body">
                                 <div class="form-group">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -55,7 +56,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success">
-                                    <span class="tf-icons bx bxs-save"></span>&nbsp; Save
+                                    <span class="tf-icons bx bxs-save"></span>&nbsp; Update
                                 </button>
                                 <button class="btn btn-info" asp-action="Index">
                                     <span class="tf-icons bx bx-list-ul"></span>&nbsp; View List

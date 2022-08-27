@@ -37,7 +37,7 @@ namespace Engotalk.Model
         [Column(TypeName = "nvarchar(200)")]
         [Display(Name = "Course Duration")]
         public string CourseDuration { get; set; }
-
+        public bool IsDeleted { get; set; }
 
 
     }

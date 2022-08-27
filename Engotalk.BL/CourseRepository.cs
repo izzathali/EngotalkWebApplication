@@ -26,9 +26,33 @@ namespace Engotalk.BL
             return await db.SaveChangesAsync();
         }
 
+        public async Task<int> DeleteCourse(int id)
+        {
+            var course = db.Courses.Find(id);
+
+            if (course != null)
+            {
+                course.IsDeleted = true;
+                db.Courses.Update(course);
+            }
+
+            return await db.SaveChangesAsync();
+        }
+
+        public async Task<CourseM> GetCoursByCourseId(int id)
+        {
+            return await db.Courses
+                .Where(i => i.IsDeleted == false)
+                .Include(u => u.department)
+                .Include(u => u.department.university)
+                .Include(u => u.department.university.country)
+                .FirstOrDefaultAsync(i => i.CourseId == id);
+        }
+
         public async Task<IEnumerable<CourseM>> GetCourses()
         {
             return await db.Courses
+                .Where(u => u.IsDeleted == false)
                 .Include(o => o.department)
                 .Include(o => o.department.university)
                 .Include(o => o.department.university.country)
@@ -37,7 +61,7 @@ namespace Engotalk.BL
 
         public async Task<IEnumerable<DepartmentVM>> GetDepartmentWithCourse(int CountryId)
         {
-            var model = await db.Courses.Where(i => i.department.university.CountryId == CountryId)
+            var model = await db.Courses.Where(i => i.IsDeleted == false && i.department.university.CountryId == CountryId)
                 .GroupBy(o => new
                 {
                     Department = o.department.Department,
@@ -51,6 +75,12 @@ namespace Engotalk.BL
                 .ToListAsync();
 
             return model;
+        }
+
+        public async Task<int> UpdateCourse(CourseM course)
+        {
+            db.Courses.Update(course);
+            return await db.SaveChangesAsync();
         }
     }
 }

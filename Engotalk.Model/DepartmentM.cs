@@ -17,5 +17,6 @@ namespace Engotalk.Model
         public string Department { get; set; } = string.Empty;
         public int UniversityId { get; set; }
         public UniversityM? university { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -15,6 +15,8 @@ namespace Engotalk.Model
         [Column(TypeName = "nvarchar(150)")]
         [Display(Name = "Country ")]
         public string CountryName { get; set; } = string.Empty;
+        public bool IsDeleted { get; set; }
         public ICollection<UniversityM> universities { get; set; }
+
     }
 }

@@ -12,5 +12,8 @@ namespace Engotalk.IBL
         public Task<int> AddDepartment(DepartmentM department);
         public Task<IEnumerable<DepartmentM>> GetDepartments();
         public Task<IEnumerable<DepartmentM>> GetDepartmentsByUnivId(int univid);
+        public Task<DepartmentM> GetDepartmentByDepartmentId(int id);
+        public Task<int> UpdateDepartment(DepartmentM department);
+        public Task<int> DeleteDepartment(int id);
     }
 }

@@ -60,30 +60,54 @@ namespace Engotalk.WebApp.Controllers
         }
 
         // GET: UniversityController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
+
+            var university = await iUniversityRepository.GetUniversitiesByUniversityId(id);
+
+            if (university == null)
+            {
+                return NotFound();
+            }
+            return View(university);
         }
 
         // POST: UniversityController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, [Bind("UniversityId,UniversityType,University,CountryId,Rank")] UniversityM universityM)
         {
             try
             {
+                if (universityM.UniversityType != "--SELECT--" && !String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
+                {
+                    await iUniversityRepository.UpdateUniversity(universityM);
+                    return RedirectToAction(nameof(Index));
+
+                }
+            }
+            catch
+            {
+            }
+
+            ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
+            return View(universityM);
+        }
+
+        // GET: UniversityController/Delete/5
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                await iUniversityRepository.DeleteUniversity(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
-        }
-
-        // GET: UniversityController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: UniversityController/Delete/5

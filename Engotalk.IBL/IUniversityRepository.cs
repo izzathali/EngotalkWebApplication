@@ -14,9 +14,14 @@ namespace Engotalk.IBL
 
         public Task<IEnumerable<UniversityM>> GetUniversities();
         public Task<IEnumerable<UniversityM>> GetUniversitiesByCountryId(int cid);
+        public Task<UniversityM> GetUniversitiesByUniversityId(int id);
         public Task<IEnumerable<UniversityM>> GetUniversitiesOrderByLastAdded();
 
         public Task<IEnumerable<UniversityVM>> GetUniversitiesByCountryIdAndCourse(int cid,string course);
         public Task<IEnumerable<CollegeVM>> GetCollegesByCountryIdAndCourse(int cid,string course);
+
+        public Task<int> UpdateUniversity(UniversityM university);
+        public Task<int> DeleteUniversity(int id);
+
     }
 }

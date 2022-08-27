@@ -12,7 +12,10 @@ namespace Engotalk.IBL
     {
         public Task<int> AddCourse(CourseM course);
         public Task<IEnumerable<CourseM>> GetCourses();
+        public Task<CourseM> GetCoursByCourseId(int id);
         public Task<IEnumerable<DepartmentVM>> GetDepartmentWithCourse(int CountryId);
+        public Task<int> UpdateCourse(CourseM course);
+        public Task<int> DeleteCourse(int id);
 
     }
 }

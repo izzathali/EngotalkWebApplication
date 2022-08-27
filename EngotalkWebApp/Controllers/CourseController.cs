@@ -33,7 +33,7 @@ namespace Engotalk.WebApp.Controllers
         {
             return View();
         }
-    
+
         // GET: CourseController/Create
         public async Task<ActionResult> Create()
         {
@@ -55,7 +55,7 @@ namespace Engotalk.WebApp.Controllers
 
             return Json(new SelectList(departments, "DepartmentId", "Department"));
         }
-    
+
 
         // POST: CourseController/Create
         [HttpPost]
@@ -81,30 +81,67 @@ namespace Engotalk.WebApp.Controllers
         }
 
         // GET: CourseController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
+            try
+            {
+                var course = await iCourseRepository.GetCoursByCourseId(id);
+
+                int CountryId = course.department.university.CountryId;
+                int UnivId = course.department.UniversityId;
+                int DeptId = course.DepartmentId;
+
+                ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName", CountryId);
+                ViewData["UniversityId"] = new SelectList(await iUniversityRepository.GetUniversitiesByCountryId(CountryId), "UniversityId", "University", UnivId);
+                ViewData["DepartmentId"] = new SelectList(await iDepartmentRepository.GetDepartmentsByUnivId(UnivId), "DepartmentId", "Department", DeptId);
+
+                if (course == null)
+                {
+                    return NotFound();
+                }
+                return View(course);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
             return View();
         }
 
         // POST: CourseController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, [Bind("CourseId,Course,DepartmentId,Band,Cost,CourseDuration,IELTSRequirment,ListeningBand,ReadingBand,WritingBand,SpeakingBand")] CourseM courseM)
         {
             try
             {
+                if (courseM.DepartmentId > 0 && !String.IsNullOrEmpty(courseM.Band.ToString()) && !String.IsNullOrEmpty(courseM.Cost.ToString()) && !String.IsNullOrEmpty(courseM.CourseDuration))
+                {
+                    await iCourseRepository.UpdateCourse(courseM);
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch
+            {
+            }
+            ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
+            return View(courseM);
+        }
+
+        // GET: CourseController/Delete/5
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                await iCourseRepository.DeleteCourse(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
-        }
-
-        // GET: CourseController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: CourseController/Delete/5

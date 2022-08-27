@@ -4,6 +4,63 @@
     IEnumerable<UniversityVM> universitiesVM = ViewBag.Universities as IEnumerable<UniversityVM>;
     IEnumerable<CollegeVM> collegeVM = ViewBag.colleges as IEnumerable<CollegeVM>;
 }
+
+
+<style>
+    .body-tbl {
+        font-size: 15px;
+        font-family: "Roboto", sans-serif;
+        margin: 25px 10px!important;
+    }
+    .text-cent{
+        text-align:center;
+    }
+    .styled-table {
+        border-collapse: collapse;
+       margin-Top:40px;
+       margin-bottom:250px;
+        /*font-size: 0.9em;*/
+       /* font-family: courier;*/
+        min-width: 100%;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+
+
+        .styled-table thead tr {
+            background-color: darkred;
+            color: #ffffff;
+            text-align: center;
+        }
+        /*Moving onto the table cells. Let's space things out a bit: */
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+            .styled-table tbody tr:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+
+        .styled-table tr td:nth-child(1), .styled-table tr th:nth-child(2) {
+            text-align: left;
+        }
+
+        .styled-table tr td:nth-child(2), .styled-table tr th:nth-child(2) {
+            text-align: left;
+        }
+/*
+        .styled-table tr td:nth-child(3), .styled-table tr th:nth-child(3) {
+            text-align: center;
+        }*/
+</style>
+
+
+
 <!--::review_part start::-->
 <section class="special_cource padding_top">
     <div class="container">
@@ -19,8 +76,50 @@
 </section>
 
 
-<!-- Start Align Area -->
 <div class="whole-wrap">
+    <div class="container ">
+        <div class="body-tbl text-center">
+
+            <table class="styled-table justify-content-center ">
+                <thead >
+                    <tr>
+                        <th>#</th>
+                        <th>Institution</th>
+                        <th>IELTS Band</th>
+                        <th>Ranking (QS)</th>
+                        <th>Cost</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (universitiesVM != null)
+                    {
+                        int no = 1;
+                        @foreach (var item in @universitiesVM)
+                        {
+                            <tr>
+                                <td>@no</td>
+                                <td>@item.University</td>
+                                <td>@item.Band</td>
+                                <td>@item.Rank</td>
+                                <td>@item.Cost</td>
+                                <td class="exper">@item.Duration</td>
+
+                            </tr>
+
+                            no++;
+                        }
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Start Align Area -->
+@*<div class="whole-wrap">
     <div class="container box_1170">
 
         <div class="section-top-border">
@@ -58,16 +157,32 @@
         </div>
 
     </div>
-</div>
+</div>*@
 <!-- End Align Area -->
 
-<section class="special_cource">
+<section id="collegeid" class="special_cource">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-5">
                 <div class="section_tittle text-center">
+                    <p>@ViewBag.Course</p>
                     <h2>Colleges</h2>
                 </div>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-3">
+                <a href="#collegeid" class="btn_1">IELTS SCORE</a>
+            </div>
+            <div class="col-md-3">
+                <a href="#collegeid" class="btn_1">TOEFL SCORE</a>
+            </div>
+            <div class="col-md-3">
+                <a href="#collegeid" class="btn_1">DET SCORE</a>
+            </div>
+            <div class="col-md-3">
+                <a href="#collegeid" class="btn_1">PTE SCORE</a>
             </div>
         </div>
     </div>
@@ -76,7 +191,7 @@
 
 
 <!-- Start Align Area -->
-<div class="whole-wrap">
+@*<div class="whole-wrap">
     <div class="container box_1170">
 
         <div class="section-top-border">
@@ -122,5 +237,67 @@
         </div>
 
     </div>
-</div>
+</div>*@
 <!-- End Align Area -->
+
+
+<div class="whole-wrap">
+    <div class="container">
+        <div class="body-tbl text-center">
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Univ & College</th>
+                        <th>IELTS Requirement</th>
+                        <th>Total IELTS Score</th>
+                        <th>Listening</th>
+                        <th>Reading</th>
+                        <th>Writing</th>
+                        <th>Speaking</th>
+                        <th>Cost</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (collegeVM != null)
+                    {
+                        int no = 1;
+                        @foreach (var item in @collegeVM)
+                        {
+                            <tr>
+                                <td>@no</td>
+                                <td>@item.College</td>
+                                <td>@item.IELTSRequirment</td>
+                                <td>@item.Band</td>
+                                <td>@item.ListeningBand</td>
+                                <td>@item.ReadingBand</td>
+                                <td>@item.WritingBand</td>
+                                <td>@item.SpeakingBand</td>
+                                <td>@item.Cost</td>
+                                <td class="exper">@item.Duration</td>
+
+                            </tr>
+
+                            no++;
+                        }
+
+                    }
+
+                    @*  <tr class="active-row">
+                    <td>Melissa</td>
+                    <td>5150</td>
+                    <td class="exper">1.5</td>
+                    </tr>
+                    <tr class="active-row">
+                    <td>Martin</td>
+                    <td>9800</td>
+                    <td class="exper">14</td>
+                    </tr>*@
+                    <!-- and so on... -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
