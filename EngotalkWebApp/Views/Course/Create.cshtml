@@ -1,7 +1,7 @@
 ﻿@using Engotalk.Model
 @model CourseM
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Add Course";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
@@ -118,47 +118,50 @@
                                     </div>
                                     <div class="col-md-6">
 
-                                        <div class="form-group">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <label for="exampleInputEmail1">IELTS Requirment</label>
-                                            <span asp-validation-for="IELTSRequirment" class="text-danger"></span>
+                                        <div id="CollegeFields">
 
-                                            <input asp-for="IELTSRequirment" type="text" class="form-control" placeholder="IELTS Requirment">
+                                            <div class="form-group">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <label for="exampleInputEmail1">IELTS Requirment</label>
+                                                <span asp-validation-for="IELTSRequirment" class="text-danger"></span>
+
+                                                <input asp-for="IELTSRequirment" type="text" class="form-control" placeholder="IELTS Requirment">
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <label for="exampleInputEmail1">Listening Band</label>
+                                                <span asp-validation-for="ListeningBand" class="text-danger"></span>
+
+                                                <input asp-for="ListeningBand" type="text" class="form-control" placeholder="Listening Band">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <label for="exampleInputEmail1">Reading Band</label>
+                                                <span asp-validation-for="ReadingBand" class="text-danger"></span>
+
+                                                <input asp-for="ReadingBand" type="text" class="form-control" placeholder="Reading Band">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <label for="exampleInputEmail1">Writing Band</label>
+                                                <span asp-validation-for="WritingBand" class="text-danger"></span>
+
+                                                <input asp-for="WritingBand" type="text" class="form-control" placeholder="Writing Band">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <label for="exampleInputEmail1">Speaking Band</label>
+                                                <span asp-validation-for="SpeakingBand" class="text-danger"></span>
+
+                                                <input asp-for="SpeakingBand" type="text" class="form-control" placeholder="Speaking Band">
+                                            </div>
+
                                         </div>
-
-
-                                        <div class="form-group">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <label for="exampleInputEmail1">Listening Band</label>
-                                            <span asp-validation-for="ListeningBand" class="text-danger"></span>
-
-                                            <input asp-for="ListeningBand" type="text" class="form-control" placeholder="Listening Band">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <label for="exampleInputEmail1">Reading Band</label>
-                                            <span asp-validation-for="ReadingBand" class="text-danger"></span>
-
-                                            <input asp-for="ReadingBand" type="text" class="form-control" placeholder="Reading Band">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <label for="exampleInputEmail1">Writing Band</label>
-                                            <span asp-validation-for="WritingBand" class="text-danger"></span>
-
-                                            <input asp-for="WritingBand" type="text" class="form-control" placeholder="Writing Band">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <label for="exampleInputEmail1">Speaking Band</label>
-                                            <span asp-validation-for="SpeakingBand" class="text-danger"></span>
-
-                                            <input asp-for="SpeakingBand" type="text" class="form-control" placeholder="Speaking Band">
-                                        </div>
-
 
                                     </div>
                                 </div>
@@ -178,11 +181,14 @@
                         <div class="col-md-12">
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success">
-                                    <span class="tf-icons bx bxs-save"></span>&nbsp; Save
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="tf-icons fa fas-save"></span>&nbsp; Save
                                 </button>
-                                <button class="btn btn-info" asp-action="Index">
-                                    <span class="tf-icons bx bx-list-ul"></span>&nbsp; View List
+                                <button type="reset" class="btn btn-default">
+                                    <span class="tf-icons fas fa-times"></span>&nbsp; Cancel
+                                </button>
+                                <button class="btn btn-outline-info pull-right" asp-action="Index">
+                                    <span class="tf-icons fas fa-list-ul"></span>&nbsp; View List
                                 </button>
                             </div>
                         </div>
@@ -198,9 +204,12 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
+            $("#CollegeFields").hide();
+
             $("#CountryList").change(function() {
                 $("#UniversityList").empty();
                 $("#DepartmentId").empty();
+                $("#CollegeFields").hide();
                 $.ajax({
                     type: 'GET',
                     url: '@Url.Action("LoadUniversities")',
@@ -226,6 +235,8 @@
                 return false;
             })
 
+
+
             $("#UniversityList").change(function() {
                 $("#DepartmentId").empty();
                 $.ajax({
@@ -242,14 +253,61 @@
                             $("#DepartmentId").append('<option value="' + dept.value + '">' +
                                 dept.text + '</option>');
                         });
+
+
+
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("GetUniversityType")",
+                            data: { id: $("#UniversityList").val() },
+                            success: function(data) {
+                                if (data == "College") {
+                                    $("#CollegeFields").show();
+
+                                }
+                                else {
+                                    $("#CollegeFields").hide();
+                                };
+                            }
+                        });
+
                     },
                     error: function(ex) {
                         alert('Faliled to retrieve departments.' + ex);
                     }
                 });
+
                 return false;
             })
+
+
+            //$("#UniversityList").change(function() {
+            //    $("#CollegeFields").hide();
+            //    $.ajax({
+            //        type: 'GET',
+            //        url: '@Url.Action("GetUniversityType")',
+            //        dataType: 'json',
+            //        data: { id: $("#UniversityList").val() },
+
+            //        success: function(univtype) {
+            //            if (univtype == "College") {
+            //                $("#CollegeFields").show();
+
+            //            }
+            //            else {
+            //                $("#CollegeFields").hide();
+            //            };
+            //        },
+            //                                                                                    ,
+            //        error: function(ex) {
+            //            alert('Faliled to retrieve univtype.' + ex);
+            //        }
+            //    });
+            //    return false;
+            //})
+
         })
+
 
     </script>
 

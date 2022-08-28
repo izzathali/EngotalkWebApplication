@@ -1,4 +1,5 @@
-﻿using Engotalk.IBL;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Engotalk.IBL;
 using Engotalk.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,9 +9,11 @@ namespace Engotalk.WebApp.Controllers
     public class CountryController : Controller
     {
         private readonly ICountryRepository iCountryRepository;
-        public CountryController(ICountryRepository _iCountryRepository)
+        private readonly INotyfService _notyf;
+        public CountryController(ICountryRepository _iCountryRepository,INotyfService notyf)
         {
             iCountryRepository = _iCountryRepository;
+            _notyf = notyf;
         }
         // GET: CountryController
         public async Task<ActionResult> Index()
@@ -43,6 +46,7 @@ namespace Engotalk.WebApp.Controllers
                 {
                     await iCountryRepository.AddCountry(country);
 
+                    _notyf.Success("Country Saved Successfully !!", 5);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -75,6 +79,8 @@ namespace Engotalk.WebApp.Controllers
                 if (!String.IsNullOrEmpty(country.CountryName))
                 {
                     await iCountryRepository.UpdateCountry(country);
+
+                    _notyf.Success("Country Updated Successfully", 5);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -90,6 +96,7 @@ namespace Engotalk.WebApp.Controllers
             try
             {
                 await iCountryRepository.DeleteCountry(id);
+                _notyf.Success("Country Deleted Successfully", 5);
 
                 return RedirectToAction(nameof(Index));
             }

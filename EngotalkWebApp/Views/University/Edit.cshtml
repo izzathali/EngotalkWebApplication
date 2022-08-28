@@ -1,7 +1,7 @@
 ﻿@using Engotalk.Model
 @model UniversityM
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Edit University";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
@@ -89,11 +89,14 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success">
-                                    <span class="tf-icons bx bxs-save"></span>&nbsp; Update
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="tf-icons fa fas-save"></span>&nbsp; Update
                                 </button>
-                                <button class="btn btn-info" asp-action="Index">
-                                    <span class="tf-icons bx bx-list-ul"></span>&nbsp; View List
+                                <button type="reset" class="btn btn-default">
+                                    <span class="tf-icons fas fa-times"></span>&nbsp; Cancel
+                                </button>
+                                <button class="btn btn-outline-info pull-right" asp-action="Index">
+                                    <span class="tf-icons fas fa-list-ul"></span>&nbsp; View List
                                 </button>
                             </div>
 

@@ -1,4 +1,5 @@
-﻿using Engotalk.IBL;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Engotalk.IBL;
 using Engotalk.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace Engotalk.WebApp.Controllers
     {
         private readonly IUniversityRepository iUniversityRepository;
         private readonly ICountryRepository iCountryRepository;
-        public UniversityController(IUniversityRepository iUniversityRepository, ICountryRepository iCountryRepository)
+        private readonly INotyfService _notyf;
+        public UniversityController(IUniversityRepository iUniversityRepository, ICountryRepository iCountryRepository, INotyfService notyf)
         {
             this.iUniversityRepository = iUniversityRepository;
             this.iCountryRepository = iCountryRepository;
+            _notyf = notyf;
         }
 
         // GET: UniversityController
@@ -47,6 +50,8 @@ namespace Engotalk.WebApp.Controllers
                 if (universityM.UniversityType != "--SELECT--" && !String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
                 {
                     await iUniversityRepository.AddUniversity(universityM);
+                    _notyf.Success("University Saved Successfully!!", 5);
+
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -83,6 +88,8 @@ namespace Engotalk.WebApp.Controllers
                 if (universityM.UniversityType != "--SELECT--" && !String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
                 {
                     await iUniversityRepository.UpdateUniversity(universityM);
+                    _notyf.Success("University Updated Successfully", 5);
+
                     return RedirectToAction(nameof(Index));
 
                 }
@@ -101,6 +108,7 @@ namespace Engotalk.WebApp.Controllers
             try
             {
                 await iUniversityRepository.DeleteUniversity(id);
+                _notyf.Success("University Deleted Successfully!!", 5);
 
                 return RedirectToAction(nameof(Index));
             }

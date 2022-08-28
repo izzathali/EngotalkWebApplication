@@ -1,4 +1,5 @@
-﻿using Engotalk.IBL;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Engotalk.IBL;
 using Engotalk.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,12 +13,14 @@ namespace Engotalk.WebApp.Controllers
         private readonly ICountryRepository iCountryRepository;
         private readonly IUniversityRepository iUniversityRepository;
         private readonly IDepartmentRepository iDepartmentRepository;
-        public CourseController(ICourseRepository iCourseRepository, IUniversityRepository iUniversityRepository, ICountryRepository iCountryRepository, IDepartmentRepository iDepartmentRepository)
+        private readonly INotyfService _notyf;
+        public CourseController(ICourseRepository iCourseRepository, IUniversityRepository iUniversityRepository, ICountryRepository iCountryRepository, IDepartmentRepository iDepartmentRepository, INotyfService notyf)
         {
             this.iCourseRepository = iCourseRepository;
             this.iUniversityRepository = iUniversityRepository;
             this.iCountryRepository = iCountryRepository;
             this.iDepartmentRepository = iDepartmentRepository;
+            _notyf = notyf;
         }
 
         // GET: CourseController
@@ -55,7 +58,12 @@ namespace Engotalk.WebApp.Controllers
 
             return Json(new SelectList(departments, "DepartmentId", "Department"));
         }
+        public async Task<JsonResult> GetUniversityType(int id)
+        {
+            var type = await iUniversityRepository.GetUniversityTypeByUniversityId(id);
 
+            return Json(type);
+        }
 
         // POST: CourseController/Create
         [HttpPost]
@@ -67,6 +75,8 @@ namespace Engotalk.WebApp.Controllers
                 try
                 {
                     await iCourseRepository.AddCourse(courseM);
+                    _notyf.Success("Course Saved Successfully!!", 5);
+
                     return RedirectToAction(nameof(Index));
                 }
                 catch
@@ -87,6 +97,11 @@ namespace Engotalk.WebApp.Controllers
             {
                 var course = await iCourseRepository.GetCoursByCourseId(id);
 
+                if (course == null)
+                {
+                    return NotFound();
+                }
+
                 int CountryId = course.department.university.CountryId;
                 int UnivId = course.department.UniversityId;
                 int DeptId = course.DepartmentId;
@@ -95,10 +110,6 @@ namespace Engotalk.WebApp.Controllers
                 ViewData["UniversityId"] = new SelectList(await iUniversityRepository.GetUniversitiesByCountryId(CountryId), "UniversityId", "University", UnivId);
                 ViewData["DepartmentId"] = new SelectList(await iDepartmentRepository.GetDepartmentsByUnivId(UnivId), "DepartmentId", "Department", DeptId);
 
-                if (course == null)
-                {
-                    return NotFound();
-                }
                 return View(course);
 
             }
@@ -119,6 +130,8 @@ namespace Engotalk.WebApp.Controllers
                 if (courseM.DepartmentId > 0 && !String.IsNullOrEmpty(courseM.Band.ToString()) && !String.IsNullOrEmpty(courseM.Cost.ToString()) && !String.IsNullOrEmpty(courseM.CourseDuration))
                 {
                     await iCourseRepository.UpdateCourse(courseM);
+                    _notyf.Success("Course Updated Successfully!!", 5);
+
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -135,6 +148,7 @@ namespace Engotalk.WebApp.Controllers
             try
             {
                 await iCourseRepository.DeleteCourse(id);
+                _notyf.Success("Course Deleted Successfully!!", 5);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -151,6 +165,7 @@ namespace Engotalk.WebApp.Controllers
         {
             try
             {
+
                 return RedirectToAction(nameof(Index));
             }
             catch

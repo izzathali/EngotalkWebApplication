@@ -5,6 +5,7 @@ using Engotalk.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,6 +104,13 @@ namespace Engotalk.BL
                 .Include(m => m.country)
                 .OrderByDescending(u => u.UniversityId)
                 .ToListAsync();
+        }
+        public async Task<string> GetUniversityTypeByUniversityId(int id)
+        {
+            return await db.Universities
+                .Where(u => u.IsDeleted == false && u.UniversityId == id)
+                .Select(i => i.UniversityType)
+                .SingleOrDefaultAsync();
         }
 
         public async Task<int> UpdateUniversity(UniversityM university)

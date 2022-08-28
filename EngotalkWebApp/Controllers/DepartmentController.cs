@@ -1,4 +1,5 @@
-﻿using Engotalk.IBL;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Engotalk.IBL;
 using Engotalk.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace Engotalk.WebApp.Controllers
     {
         private readonly IDepartmentRepository iDepartmentRepository;
         private readonly IUniversityRepository iUniversityRepository;
-        public DepartmentController(IDepartmentRepository iDepartmentRepository, IUniversityRepository iUniversityRepository)
+        private readonly INotyfService _notyf;
+        public DepartmentController(IDepartmentRepository iDepartmentRepository, IUniversityRepository iUniversityRepository,INotyfService notyf)
         {
             this.iDepartmentRepository = iDepartmentRepository;
             this.iUniversityRepository = iUniversityRepository;
+            _notyf = notyf;
         }
 
         // GET: DepartmentController
@@ -47,6 +50,8 @@ namespace Engotalk.WebApp.Controllers
                 if (!string.IsNullOrEmpty(departmentM.Department) && departmentM.UniversityId > 0)
                 {
                     await iDepartmentRepository.AddDepartment(departmentM);
+                    _notyf.Success("Department Saved Successfully !!", 5);
+
                     return RedirectToAction(nameof(Index));
                 }
                 return View();
@@ -82,6 +87,8 @@ namespace Engotalk.WebApp.Controllers
                 if (!string.IsNullOrEmpty(departmentM.Department) && departmentM.UniversityId > 0)
                 {
                     await iDepartmentRepository.UpdateDepartment(departmentM);
+                    _notyf.Success("Department Updated Successfully!!", 5);
+
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -99,6 +106,7 @@ namespace Engotalk.WebApp.Controllers
             try
             {
                 await iDepartmentRepository.DeleteDepartment(id);
+                _notyf.Success("Department Deleted Successfully!!", 5);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -115,7 +123,9 @@ namespace Engotalk.WebApp.Controllers
         {
             try
             {
+
                 return RedirectToAction(nameof(Index));
+
             }
             catch
             {
