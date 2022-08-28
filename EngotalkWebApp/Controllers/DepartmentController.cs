@@ -22,7 +22,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: DepartmentController
         public async Task<ActionResult> Index()
         {
-
+            ViewBag.Current = "DepartmentReport";
             return View(await iDepartmentRepository.GetDepartments());
         }
 
@@ -35,6 +35,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: DepartmentController/Create
         public async Task<ActionResult> Create()
         {
+            ViewBag.Current = "DepartmentCreate";
             ViewData["UniversityId"] = new SelectList(await iUniversityRepository.GetUniversities(), "UniversityId", "University");
 
             return View();
@@ -65,6 +66,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: DepartmentController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+            ViewBag.Current = "DepartmentReport";
             ViewData["UniversityId"] = new SelectList(await iUniversityRepository.GetUniversities(), "UniversityId", "University");
 
             var department = await iDepartmentRepository.GetDepartmentByDepartmentId(id);
@@ -105,6 +107,8 @@ namespace Engotalk.WebApp.Controllers
         {
             try
             {
+                ViewBag.Current = "DepartmentReport";
+
                 await iDepartmentRepository.DeleteDepartment(id);
                 _notyf.Success("Department Deleted Successfully!!", 5);
 

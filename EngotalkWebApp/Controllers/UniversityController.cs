@@ -22,7 +22,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: UniversityController
         public async Task<ActionResult> Index()
         {
-
+            ViewBag.Current = "UniversityReport";
             return View(await iUniversityRepository.GetUniversitiesOrderByLastAdded());
         }
 
@@ -35,6 +35,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: UniversityController/Create
         public async Task<ActionResult> Create()
         {
+            ViewBag.Current = "UniversityCreate";
             ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
 
             return View();
@@ -67,6 +68,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: UniversityController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+            ViewBag.Current = "UniversityReport";
             ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
 
             var university = await iUniversityRepository.GetUniversitiesByUniversityId(id);
@@ -85,6 +87,7 @@ namespace Engotalk.WebApp.Controllers
         {
             try
             {
+
                 if (universityM.UniversityType != "--SELECT--" && !String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
                 {
                     await iUniversityRepository.UpdateUniversity(universityM);
@@ -107,6 +110,8 @@ namespace Engotalk.WebApp.Controllers
         {
             try
             {
+                ViewBag.Current = "UniversityReport";
+
                 await iUniversityRepository.DeleteUniversity(id);
                 _notyf.Success("University Deleted Successfully!!", 5);
 

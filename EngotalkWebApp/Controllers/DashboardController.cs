@@ -6,6 +6,7 @@ namespace Engotalk.WebApp.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Current = "Dashboard";
             return View();
         }
     }

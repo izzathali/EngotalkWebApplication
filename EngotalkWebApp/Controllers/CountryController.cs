@@ -18,7 +18,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: CountryController
         public async Task<ActionResult> Index()
         {
-
+            ViewBag.Current = "CountryReport";
             return View(await iCountryRepository.GetCountriesAsync());
         }
 
@@ -31,6 +31,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: CountryController/Create
         public ActionResult Create()
         {
+            ViewBag.Current = "CountryCreate";
             return View();
         }
 
@@ -60,6 +61,8 @@ namespace Engotalk.WebApp.Controllers
         // GET: CountryController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+            ViewBag.Current = "CountryReport";
+
             var category = await iCountryRepository.GetCountryByCountryId(id);
 
             if (category == null)
@@ -95,6 +98,8 @@ namespace Engotalk.WebApp.Controllers
         {
             try
             {
+                ViewBag.Current = "CountryReport";
+
                 await iCountryRepository.DeleteCountry(id);
                 _notyf.Success("Country Deleted Successfully", 5);
 

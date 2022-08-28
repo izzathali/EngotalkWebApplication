@@ -4,9 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] | ENGOTALK</title>
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/POS.WebApp.styles.css" asp-append-version="true" />*@
+    
+    <link rel="icon" href="~/assets/fe/img/favicon.png">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -37,8 +36,7 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="~/assets/be/dist/css/adminlte.min.css">
-
-
+    <link rel="stylesheet" href="~/css/customstyle.css" asp-append-version="true" >
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
@@ -156,8 +154,8 @@
                     <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-flat" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item @(ViewBag.Current == "Dashboard" ? "menu-open" : "")">
+                            <a asp-controller="Dashboard" asp-action="Index" class="nav-link @(ViewBag.Current == "Dashboard" ? "active" : "")">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -167,9 +165,9 @@
 
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                        <li class="nav-item @(ViewBag.Current == "CountryCreate" || ViewBag.Current == "CountryReport" ? "menu-open" : "")">
+                            <a href="#" class="nav-link @(ViewBag.Current == "CountryCreate" || ViewBag.Current == "CountryReport" ? "active" : "")">
+                                <i class="nav-icon fas fa-flag"></i>
                                 <p>
                                     Country
                                     <i class="fas fa-angle-left right"></i>
@@ -177,13 +175,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-controller="Country" asp-action="Create" class="nav-link">
+                                    <a asp-controller="Country" asp-action="Create" class="nav-link @(ViewBag.Current == "CountryCreate" ? "active" : "") ">
                                         <i class="fa fa-plus-circle	nav-icon"></i>
                                         <p>Add Country</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-controller="Country" asp-action="Index" class="nav-link">
+                                    <a asp-controller="Country" asp-action="Index" class="nav-link @(ViewBag.Current == "CountryReport" ? "active" : "")">
                                         <i class="fa fa-file-pdf nav-icon"></i>
                                         <p>Country Report</p>
                                     </a>
@@ -193,9 +191,9 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-cube"></i>
+                        <li class="nav-item @(ViewBag.Current == "UniversityCreate" || ViewBag.Current == "UniversityReport" ? "menu-open" : "")">
+                            <a href="#" class="nav-link @(ViewBag.Current == "UniversityCreate" || ViewBag.Current == "UniversityReport" ? "active" : "")">
+                                <i class="nav-icon fa fa-university"></i>
                                 <p>
                                     University / College
                                     <i class="fas fa-angle-left right"></i>
@@ -203,13 +201,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-controller="University" asp-action="Create" class="nav-link">
+                                    <a asp-controller="University" asp-action="Create" class="nav-link @(ViewBag.Current == "UniversityCreate" ? "active" : "")">
                                         <i class="fa fa-plus-circle	nav-icon"></i>
                                         <p>Add University</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-controller="University" asp-action="Index" class="nav-link">
+                                    <a asp-controller="University" asp-action="Index" class="nav-link @(ViewBag.Current == "UniversityReport" ? "active" : "")">
                                         <i class="fa fa-file-pdf nav-icon"></i>
                                         <p>University Report</p>
                                     </a>
@@ -219,9 +217,9 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                        <li class="nav-item @(ViewBag.Current == "DepartmentCreate" || ViewBag.Current == "DepartmentReport" ? "menu-open" : "")">
+                            <a href="#" class="nav-link  @(ViewBag.Current == "DepartmentCreate" || ViewBag.Current == "DepartmentReport" ? "active" : "")">
+                                <i class="nav-icon fas fa-building"></i>
                                 <p>
                                     Department
                                     <i class="fas fa-angle-left right"></i>
@@ -229,13 +227,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-controller="Department" asp-action="Create" class="nav-link">
+                                    <a asp-controller="Department" asp-action="Create" class="nav-link @(ViewBag.Current == "DepartmentCreate" ? "active" : "")">
                                         <i class="fa fa-plus-circle	nav-icon"></i>
                                         <p>Add Department</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-controller="Department" asp-action="Index" class="nav-link">
+                                    <a asp-controller="Department" asp-action="Index" class="nav-link @(ViewBag.Current == "DepartmentReport" ? "active" : "")">
                                         <i class="fa fa-file-pdf nav-icon"></i>
                                         <p>Department Report</p>
                                     </a>
@@ -246,9 +244,9 @@
                         </li>
 
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-cube"></i>
+                        <li class="nav-item @(ViewBag.Current == "CourseCreate" || ViewBag.Current == "CourseReport" ? "menu-open" : "")">
+                            <a href="#" class="nav-link @(ViewBag.Current == "CourseCreate" || ViewBag.Current == "CourseReport" ? "active" : "")">
+                                <i class="nav-icon fa fa-graduation-cap"></i>
                                 <p>
                                     Course
                                     <i class="fas fa-angle-left right"></i>
@@ -256,13 +254,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-controller="Course" asp-action="Create" class="nav-link">
+                                    <a asp-controller="Course" asp-action="Create" class="nav-link @(ViewBag.Current == "CourseCreate" ? "active" : "")">
                                         <i class="fa fa-plus-circle	nav-icon"></i>
                                         <p>Add Course</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-controller="Course" asp-action="Index" class="nav-link">
+                                    <a asp-controller="Course" asp-action="Index" class="nav-link @(ViewBag.Current == "CourseReport" ? "active" : "")">
                                         <i class="fa fa-file-pdf nav-icon"></i>
                                         <p>Course Report</p>
                                     </a>

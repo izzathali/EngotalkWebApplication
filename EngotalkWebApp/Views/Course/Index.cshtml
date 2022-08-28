@@ -13,12 +13,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1></h1>
+                <a asp-action="Create" class="btn btn-secondary">
+                    <span class="tf-icons fas fa-plus"></span>&nbsp; Add Course
+                </a>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">DataTables</li>
+                    <li class="breadcrumb-item"><a href="#">Course</a></li>
+                    <li class="breadcrumb-item active">Report</li>
                 </ol>
             </div>
         </div>
@@ -39,7 +41,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example2" class="table table-bordered table-hover">
+                        <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Course</th>
@@ -53,7 +55,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @{
                                     if (@Model != null)
                                     {
@@ -76,8 +77,8 @@
                                                 <td>$@item.Cost</td>
                                                 <td>@item.CourseDuration</td>
                                                 <td>
-                                                    <a asp-action="Edit" asp-route-id="@item.CourseId"><i class="fas fa-edit me-1"></i> </a> |
-                                                    <a asp-action="Delete" asp-route-id="@item.CourseId"><i class="fas fa-trash me-1"></i> </a>
+                                                    <a class="btn btn-warning btn-xs" asp-action="Edit" asp-route-id="@item.CourseId"><i class="fas fa-edit me-1"></i> Edit</a>
+                                                    <a class="btn btn-danger btn-xs" asp-action="Delete" asp-route-id="@item.CourseId"><i class="fas fa-trash me-1"></i> Delete</a>
                                                 </td>
                                             </tr>
 
@@ -86,13 +87,27 @@
 
                                 }
 
-                            </tbody>
 
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Department</th>
+                                    <th>University</th>
+                                    <th>Country</th>
+                                    <th>Band</th>
+                                    <th>Cost</th>
+                                    <th>Duration</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
+
+
             </div>
             <!-- /.col -->
         </div>

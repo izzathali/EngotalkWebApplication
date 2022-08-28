@@ -26,7 +26,7 @@ namespace Engotalk.WebApp.Controllers
         // GET: CourseController
         public async Task<ActionResult> Index()
         {
-
+            ViewBag.Current = "CourseReport";
 
             return View(await iCourseRepository.GetCourses());
         }
@@ -40,9 +40,8 @@ namespace Engotalk.WebApp.Controllers
         // GET: CourseController/Create
         public async Task<ActionResult> Create()
         {
+            ViewBag.Current = "CourseCreate";
             ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
-            //ViewData["UniversityId"] = new SelectList(await iUniversityRepository.GetUniversities(), "UniversityId", "University");
-            //ViewData["DepartmentId"] = new SelectList(await iDepartmentRepository.GetDepartments(), "DepartmentId", "Department");
 
             return View();
         }
@@ -70,6 +69,7 @@ namespace Engotalk.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind("Course,DepartmentId,Band,Cost,CourseDuration,IELTSRequirment,ListeningBand,ReadingBand,WritingBand,SpeakingBand")] CourseM courseM)
         {
+
             if (courseM.DepartmentId > 0 && !String.IsNullOrEmpty(courseM.Band.ToString()) && !String.IsNullOrEmpty(courseM.Cost.ToString()) && !String.IsNullOrEmpty(courseM.CourseDuration))
             {
                 try
@@ -84,8 +84,6 @@ namespace Engotalk.WebApp.Controllers
                 }
             }
             ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
-            //ViewData["UniversityId"] = new SelectList(await iUniversityRepository.GetUniversities(), "UniversityId", "University");
-            //ViewData["DepartmentId"] = new SelectList(await iDepartmentRepository.GetDepartments(), "DepartmentId", "Department");
 
             return View();
         }
@@ -95,6 +93,8 @@ namespace Engotalk.WebApp.Controllers
         {
             try
             {
+                ViewBag.Current = "CourseReport";
+
                 var course = await iCourseRepository.GetCoursByCourseId(id);
 
                 if (course == null)

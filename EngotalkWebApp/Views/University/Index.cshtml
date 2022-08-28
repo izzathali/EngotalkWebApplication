@@ -13,12 +13,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1></h1>
+                <a asp-action="Create" class="btn btn-secondary">
+                    <span class="tf-icons fas fa-plus"></span>&nbsp; Add University
+                </a>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">DataTables</li>
+                    <li class="breadcrumb-item"><a href="#">University</a></li>
+                    <li class="breadcrumb-item active">Report</li>
                 </ol>
             </div>
         </div>
@@ -62,8 +64,8 @@
                                                 <td>@item.country?.CountryName</td>
                                                 <td>@item.Rank</td>
                                                 <td>
-                                                    <a asp-action="Edit" asp-route-id="@item.UniversityId"><i class="fas fa-edit me-1"></i> Edit</a> |
-                                                    <a asp-action="Delete" asp-route-id="@item.UniversityId"><i class="fas fa-trash me-1"></i> Delete</a>
+                                                    <a class="btn btn-warning btn-xs" asp-action="Edit" asp-route-id="@item.UniversityId"><i class="fas fa-edit me-1"></i> Edit</a> 
+                                                    <a class="btn btn-danger btn-xs" asp-action="Delete" asp-route-id="@item.UniversityId"><i class="fas fa-trash me-1"></i> Delete</a>
                                                 </td>
                                             </tr>
 

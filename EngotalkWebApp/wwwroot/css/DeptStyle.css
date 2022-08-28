@@ -1,0 +1,7 @@
+﻿.course-name {
+    color: black;
+}
+
+    .course-name:hover {
+        color: #fd7e14;
+    }

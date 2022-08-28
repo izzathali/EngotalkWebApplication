@@ -1,0 +1,15 @@
+﻿.custom-edit {
+    color: #ffc107 !important;
+}
+
+    .custom-edit:hover {
+        color: #dfa907 !important;
+    }
+
+.custom-delete {
+    color: #ef3232 !important;
+}
+
+    .custom-delete :hover {
+        color: #c9171f !important;
+    }
