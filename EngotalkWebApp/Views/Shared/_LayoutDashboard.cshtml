@@ -195,7 +195,7 @@
                             <a href="#" class="nav-link @(ViewBag.Current == "UniversityCreate" || ViewBag.Current == "UniversityReport" ? "active" : "")">
                                 <i class="nav-icon fa fa-university"></i>
                                 <p>
-                                    University / College
+                                    Institute
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -203,13 +203,13 @@
                                 <li class="nav-item">
                                     <a asp-controller="University" asp-action="Create" class="nav-link @(ViewBag.Current == "UniversityCreate" ? "active" : "")">
                                         <i class="fa fa-plus-circle	nav-icon"></i>
-                                        <p>Add University</p>
+                                        <p>Add Institute</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a asp-controller="University" asp-action="Index" class="nav-link @(ViewBag.Current == "UniversityReport" ? "active" : "")">
                                         <i class="fa fa-file-pdf nav-icon"></i>
-                                        <p>University Report</p>
+                                        <p>Institute Report</p>
                                     </a>
                                 </li>
 
@@ -370,6 +370,10 @@
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $("#example_clg").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example_clg_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,

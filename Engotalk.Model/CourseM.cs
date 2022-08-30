@@ -12,31 +12,35 @@ namespace Engotalk.Model
     {
         [Key]
         public int CourseId { get; set; }
-        [Display(Name = "Course Title")]
 
+        [Display(Name = "Course Title")]
         public string Course { get; set; } = String.Empty;
+
         public int DepartmentId { get; set; }
         public DepartmentM? department { get; set; }
-        public string? IELTSRequirment { get; set; }
-        public string Band { get; set; } = String.Empty;
 
         [Column(TypeName = "nvarchar(20)")]
-        [Display(Name = "Listening Band")]
-        public string? ListeningBand { get; set; }
-        [Column(TypeName = "nvarchar(20)")]
-        [Display(Name = "Reading Band")]
-        public string? ReadingBand { get; set; }
-        [Column(TypeName = "nvarchar(20)")]
-        [Display(Name = "Writing Band")]
-        public string? WritingBand { get; set; }
-        [Column(TypeName = "nvarchar(20)")]
-        [Display(Name = "Speaking Band")]
-        public string? SpeakingBand { get; set; }
+        [Display(Name = "IELTS")]
+        public string? IELTSBand { get; set; }
 
-        public decimal Cost { get; set; }
+        [Column(TypeName = "nvarchar(20)")]
+        [Display(Name = "GRE")]
+        public string? GREScore { get; set; }
+
+        [Column(TypeName = "nvarchar(20)")]
+        [Display(Name = "TOEFL")]
+        public string? TOEFLScore { get; set; }
+
+        [Column(TypeName = "nvarchar(20)")]
+        [Display(Name = "SAT")]
+        public string? SATScore { get; set; }
+        //Cost string bcos of approximate amnt
+        public string? Cost { get; set; }
+
         [Column(TypeName = "nvarchar(200)")]
         [Display(Name = "Course Duration")]
-        public string CourseDuration { get; set; }
+        public string? CourseDuration { get; set; }
+
         public bool IsDeleted { get; set; }
 
 

@@ -4,7 +4,8 @@
     ViewData["Title"] = "Edit Course";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 
-    string visibility = Model.department.university.UniversityType == "College" ? "inline" : "none";
+    string visibility = Model.department?.university?.UniversityType == "College" ? "inline" : "none";
+    string visibilityUniv = Model.department?.university?.UniversityType == "University" ? "inline" : "none";
 }
 
 
@@ -47,8 +48,7 @@
                             <div class="card-body">
 
                                 <div class="row">
-                                    <div class="col-md-6">
-
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                             <label for="exampleInputEmail1">Country</label>
@@ -59,19 +59,22 @@
 
                                             </select>
 
-
                                         </div>
+                                    </div>
 
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <label for="exampleInputEmail1">University</label>
+                                            <label for="exampleInputEmail1">University / College</label>
                                             <span class="text-danger"></span>
 
                                             <select id="UniversityList" type="text" class="form-control" asp-items="ViewBag.UniversityId">
                                                 <option disabled selected>--- SELECT ---</option>
                                             </select>
                                         </div>
+                                    </div>
 
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                             <label for="exampleInputEmail1">Department</label>
@@ -81,6 +84,13 @@
                                                 <option disabled selected>--- SELECT ---</option>
                                             </select>
                                         </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-8">
 
                                         <div class="form-group">
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -89,81 +99,81 @@
 
                                             <input asp-for="Course" type="text" class="form-control" placeholder="Course">
                                         </div>
-
-
-
-                                        <div class="form-group">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <label for="exampleInputEmail1">Total Band</label>
-                                            <span asp-validation-for="Band" class="text-danger"></span>
-
-                                            <input asp-for="Band"
-                                                   type="text" class="form-control" placeholder="Band">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <label for="exampleInputEmail1">Fee</label>
-                                            <span asp-validation-for="Cost" class="text-danger"></span>
-
-                                            <input asp-for="Cost"
-                                                   type="number" class="form-control" placeholder="Fee">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <label for="exampleInputEmail1">Course Duration</label>
-                                            <span asp-validation-for="CourseDuration" class="text-danger"></span>
-
-                                            <input asp-for="CourseDuration"
-                                                   type="text" class="form-control" id="exampleInputEmail1" placeholder="Course Duration">
-                                        </div>
-
                                     </div>
-                                    <div class="col-md-6">
-                                        <div id="CollegeFields" style="display:@visibility;"  >
+                                </div>
+
+                                <div id="UnivFields" style="display:@visibilityUniv;">
+
+                                    <div class="row">
+
+                                        <div class="col-md-4">
 
                                             <div class="form-group">
                                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                <label for="exampleInputEmail1">IELTS Requirment</label>
-                                                <span asp-validation-for="IELTSRequirment" class="text-danger"></span>
+                                                <label for="exampleInputEmail1">Fee</label>
+                                                <span asp-validation-for="Cost" class="text-danger"></span>
 
-                                                <input asp-for="IELTSRequirment" type="text" class="form-control" placeholder="IELTS Requirment">
+                                                <input asp-for="Cost"
+                                                       type="text" class="form-control" placeholder="Fee">
                                             </div>
-
+                                        </div>
+                                        <div class="col-md-4">
 
                                             <div class="form-group">
                                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                <label for="exampleInputEmail1">Listening Band</label>
-                                                <span asp-validation-for="ListeningBand" class="text-danger"></span>
+                                                <label for="exampleInputEmail1">Course Duration</label>
+                                                <span asp-validation-for="CourseDuration" class="text-danger"></span>
 
-                                                <input asp-for="ListeningBand" type="text" class="form-control" placeholder="Listening Band">
+                                                <input asp-for="CourseDuration"
+                                                       type="text" class="form-control" id="exampleInputEmail1" placeholder="Course Duration">
                                             </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="CollegeFields" style="display:@visibility;">
+                                    <div class="row">
+                                        <div class="col-md-3">
 
                                             <div class="form-group">
                                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                <label for="exampleInputEmail1">Reading Band</label>
-                                                <span asp-validation-for="ReadingBand" class="text-danger"></span>
+                                                <label for="exampleInputEmail1">IELTS Band</label>
+                                                <span asp-validation-for="IELTSBand" class="text-danger"></span>
 
-                                                <input asp-for="ReadingBand" type="text" class="form-control" placeholder="Reading Band">
+                                                <input asp-for="IELTSBand"
+                                                       type="text" class="form-control" placeholder="IELTS Band">
                                             </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <label for="exampleInputEmail1">GRE Score</label>
+                                                <span asp-validation-for="GREScore" class="text-danger"></span>
+
+                                                <input asp-for="GREScore" type="text" class="form-control" placeholder="GRE Score">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
 
                                             <div class="form-group">
                                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                <label for="exampleInputEmail1">Writing Band</label>
-                                                <span asp-validation-for="WritingBand" class="text-danger"></span>
+                                                <label for="exampleInputEmail1">TOEFL Score</label>
+                                                <span asp-validation-for="TOEFLScore" class="text-danger"></span>
 
-                                                <input asp-for="WritingBand" type="text" class="form-control" placeholder="Writing Band">
+                                                <input asp-for="TOEFLScore" type="text" class="form-control" placeholder="TOEFL Score">
                                             </div>
 
+                                        </div>
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                <label for="exampleInputEmail1">Speaking Band</label>
-                                                <span asp-validation-for="SpeakingBand" class="text-danger"></span>
+                                                <label for="exampleInputEmail1">SAT Score</label>
+                                                <span asp-validation-for="SATScore" class="text-danger"></span>
 
-                                                <input asp-for="SpeakingBand" type="text" class="form-control" placeholder="Speaking Band">
+                                                <input asp-for="SATScore" type="text" class="form-control" placeholder="SAT Score">
                                             </div>
-
 
                                         </div>
                                     </div>
@@ -187,9 +197,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     <span class="tf-icons fas fa-save"></span>&nbsp; Update
                                 </button>
-                                   <button type="reset" class="btn btn-default">
+                                <a asp-action="Edit" asp-route-id="@Model.CourseId"  class="btn btn-default">
                                     <span class="tf-icons fas fa-times"></span>&nbsp; Cancel
-                                </button>
+                                </a>
                                 <button class="btn btn-outline-info pull-right" asp-action="Index">
                                     <span class="tf-icons fas fa-list-ul"></span>&nbsp; View List
                                 </button>
@@ -213,6 +223,7 @@
                 $("#UniversityList").empty();
                 $("#DepartmentId").empty();
                 $("#CollegeFields").hide();
+                $("#UnivFields").hide();
                 $.ajax({
                     type: 'GET',
                     url: '@Url.Action("LoadUniversities")',
@@ -221,7 +232,7 @@
 
                     success: function(universities) {
                         $("#UniversityList").append('<option value="' + -1 + '"> ' +
-                            "Select University" + '</option>');
+                            "Select University / College" + '</option>');
 
                         $("#DepartmentId").append('<option value="' + -1 + '"> ' +
                             "Select Department" + '</option>');
@@ -261,11 +272,13 @@
                             data: { id: $("#UniversityList").val() },
                             success: function(data) {
                                 if (data == "College") {
+                                    $("#UnivFields").hide();
                                     $("#CollegeFields").show();
 
                                 }
                                 else {
                                     $("#CollegeFields").hide();
+                                    $("#UnivFields").show();
                                 };
                             }
                         });

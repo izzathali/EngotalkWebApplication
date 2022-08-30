@@ -1,7 +1,7 @@
 ﻿@using Engotalk.Model
 @model UniversityM
 @{
-    ViewData["Title"] = "Add University";
+    ViewData["Title"] = "Add Institute";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
@@ -15,7 +15,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">University</a></li>
+                    <li class="breadcrumb-item"><a href="#">Institute</a></li>
                     <li class="breadcrumb-item active">Add</li>
                 </ol>
             </div>
@@ -32,75 +32,143 @@
                 <!-- general form elements -->
                 <div class="card card-lightblue">
                     <div class="card-header">
-                        <h3 class="card-title">Add Unviersity / College</h3>
+                        <h3 class="card-title">Add Institute</h3>
                     </div>
                     <!-- /.card-header -->
+                    <!-- form start -->
+                    <form asp-action="Create">
 
-                    <div class="col-md-6">
+                        <div class="col-md-12">
 
-                        <!-- form start -->
-                        <form asp-action="Create">
                             <div class="card-body">
 
-                                <div class="form-group">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <label for="exampleInputEmail1">University / College Type</label>
-                                    <span asp-validation-for="UniversityType" class="text-danger"></span>
+                                <div class="row">
 
-                                    <select asp-for="UniversityType" type="text" class="form-control">
-                                        <option disabled selected > --SELECT-- </option>
-                                        <option>University</option>
-                                        <option>College</option>
-                                    </select>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <label for="exampleInputEmail1">Type</label>
+                                            <span asp-validation-for="Type" class="text-danger"></span>
+
+                                            <select asp-for="Type" type="text" class="form-control">
+                                                <option disabled selected> --SELECT-- </option>
+                                                <option>Public</option>
+                                                <option>Private</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <label for="exampleInputEmail1">University / College Type</label>
+                                            <span asp-validation-for="UniversityType" class="text-danger"></span>
+
+                                            <select id="inst_type" asp-for="UniversityType" type="text" class="form-control">
+                                                <option disabled selected> --SELECT-- </option>
+                                                <option>University</option>
+                                                <option>College</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <label for="exampleInputEmail1">Country</label>
+                                            <span asp-validation-for="CountryId" class="text-danger"></span>
+
+                                            <select asp-for="CountryId" type="text" class="form-control" asp-items="ViewBag.CountryId">
+                                                <option disabled selected> --SELECT-- </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-8">
 
-                                <div class="form-group">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <label for="exampleInputEmail1">Unviersity / College</label>
-                                    <span asp-validation-for="University" class="text-danger"></span>
+                                        <div class="form-group">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <label for="exampleInputEmail1">Institute</label>
+                                            <span asp-validation-for="University" class="text-danger"></span>
 
-                                    <input asp-for="University"
-                                           type="text" class="form-control" id="exampleInputEmail1" placeholder="Unviersity / College">
+                                            <input asp-for="University"
+                                                   type="text" class="form-control" id="exampleInputEmail1" placeholder="Unviersity / College Name">
+                                        </div>
+
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <label for="exampleInputEmail1">Country</label>
-                                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                                <div id="univ_fields">
 
-                                    <select asp-for="CountryId" type="text" class="form-control" asp-items="ViewBag.CountryId">
-                                         <option disabled selected > --SELECT-- </option>
+                                    <div class="row">
 
-                                    </select>
-                                </div>
+                                        <div class="col-md-4">
 
-                                <div class="form-group">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <label for="exampleInputEmail1">Rank</label>
-                                    <span asp-validation-for="Rank" class="text-danger"></span>
+                                            <div class="form-group">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <label for="exampleInputEmail1">Location</label>
+                                                <span asp-validation-for="Location" class="text-danger"></span>
 
-                                    <input asp-for="Rank"
-                                           type="number" class="form-control" placeholder="Rank">
+                                                <input asp-for="Location"
+                                                       type="text" class="form-control" id="exampleInputEmail1" placeholder="Location City">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+
+                                            <div class="form-group">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <label for="exampleInputEmail1">Established</label>
+                                                <span asp-validation-for="Established" class="text-danger"></span>
+
+                                                <input asp-for="Established"
+                                                       type="text" class="form-control" id="exampleInputEmail1" placeholder="Established">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+
+                                            <div class="form-group">
+
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <label for="exampleInputEmail1">ExamsAccepted</label>
+                                                <span asp-validation-for="ExamsAccepted" class="text-danger"></span>
+
+                                                <input asp-for="ExamsAccepted"
+                                                       type="text" class="form-control" id="exampleInputEmail1" placeholder="Exams Accepted">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <span class="tf-icons fas fa-save"></span>&nbsp; Save
+                                                </button>
+                                                <button type="reset" class="btn btn-default">
+                                                    <span class="tf-icons fas fa-times"></span>&nbsp; Cancel
+                                                </button>
+                                                <button class="btn btn-outline-info pull-right" asp-action="Index">
+                                                    <span class="tf-icons fas fa-list-ul"></span>&nbsp; View List
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
                                 </div>
 
                             </div>
-                            <!-- /.card-body -->
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">
-                                    <span class="tf-icons fas fa-save"></span>&nbsp; Save
-                                </button>
-                                <button type="reset" class="btn btn-default">
-                                    <span class="tf-icons fas fa-times"></span>&nbsp; Cancel
-                                </button>
-                                <button class="btn btn-outline-info pull-right" asp-action="Index">
-                                    <span class="tf-icons fas fa-list-ul"></span>&nbsp; View List
-                                </button>
-                            </div>
-
-                        </form>
-                    </div>
+                        </div>
+                    </form>
 
                 </div>
                 <!-- /.card -->
@@ -108,3 +176,29 @@
         </div>
     </div>
 </section>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $("#univ_fields").hide();
+
+            $("#inst_type").change(function() {
+                var InstType = $('#inst_type').val();
+
+                if (InstType == "University") {
+                    $("#univ_fields").show();
+                } else {
+                    $("#univ_fields").hide();
+                }
+
+                return false;
+            })
+
+        })
+
+
+    </script>
+
+
+}

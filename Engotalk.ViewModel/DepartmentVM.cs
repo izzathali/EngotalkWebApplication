@@ -8,7 +8,10 @@ namespace Engotalk.ViewModel
 {
     public class DepartmentVM
     {
-        public string Department { get; set; }
-        public string Course { get; set; }
+        public int? DepartmentId { get; set; }
+        public string? Department { get; set; }
+        public string? Course { get; set; }
+        public string? Country { get; set; }
+        public string? University { get; set; }
     }
 }

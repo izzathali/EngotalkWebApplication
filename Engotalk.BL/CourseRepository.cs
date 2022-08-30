@@ -52,7 +52,28 @@ namespace Engotalk.BL
         public async Task<IEnumerable<CourseM>> GetCourses()
         {
             return await db.Courses
-                .Where(u => u.IsDeleted == false)
+                .Where(u => 
+                u.IsDeleted == false &&
+                u.department.IsDeleted == false &&
+                u.department.university.IsDeleted == false &&
+                u.department.university.country.IsDeleted == false 
+                )
+                .Include(o => o.department)
+                .Include(o => o.department.university)
+                .Include(o => o.department.university.country)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<CourseM>> GetCoursesByInstituteType(string InstType)
+        {
+            return await db.Courses
+                .Where(u =>
+                u.IsDeleted == false &&
+                u.department.IsDeleted == false &&
+                u.department.university.IsDeleted == false &&
+                u.department.university.country.IsDeleted == false &&
+                u.department.university.UniversityType == InstType
+                )
                 .Include(o => o.department)
                 .Include(o => o.department.university)
                 .Include(o => o.department.university.country)
@@ -61,7 +82,14 @@ namespace Engotalk.BL
 
         public async Task<IEnumerable<DepartmentVM>> GetDepartmentWithCourse(int CountryId)
         {
-            var model = await db.Courses.Where(i => i.IsDeleted == false && i.department.university.CountryId == CountryId)
+            var model = await db.Courses
+                .Where(i => 
+                i.IsDeleted == false && 
+                i.department.IsDeleted == false &&
+                i.department.university.IsDeleted == false &&
+                i.department.university.country.IsDeleted == false &&
+                i.department.university.CountryId == CountryId 
+                )
                 .GroupBy(o => new
                 {
                     Department = o.department.Department,

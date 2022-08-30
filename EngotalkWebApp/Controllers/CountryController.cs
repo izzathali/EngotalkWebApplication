@@ -110,7 +110,7 @@ namespace Engotalk.WebApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-
+      
         // POST: CountryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

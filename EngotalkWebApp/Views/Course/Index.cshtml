@@ -37,7 +37,7 @@
 
                 <div class="card card-lightblue">
                     <div class="card-header">
-                        <h3 class="card-title">Course Report</h3>
+                        <h3 class="card-title">University Courses Report</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -47,10 +47,11 @@
                                     <th>Course</th>
                                     <th>Department</th>
                                     <th>University</th>
-                                    <th>Country</th>
-                                    <th>Band</th>
-                                    <th>Cost</th>
+                                    <th>Est.</th>
+                                    <th>Type</th>
                                     <th>Duration</th>
+                                    <th>Tuition Fees</th>
+                                    <th>Exams Accepted</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -70,12 +71,11 @@
                                                 <td>
                                                     @item.department.university.University
                                                 </td>
-                                                <td>
-                                                    @item.department.university.country.CountryName
-                                                </td>
-                                                <td>@item.Band</td>
-                                                <td>$@item.Cost</td>
+                                                <td>@item.department.university.Established</td>
+                                                <td>@item.department.university.Type</td>
                                                 <td>@item.CourseDuration</td>
+                                                <td>@item.Cost</td>
+                                                <td>@item.department.university.ExamsAccepted</td>
                                                 <td>
                                                     <a class="btn btn-warning btn-xs" asp-action="Edit" asp-route-id="@item.CourseId"><i class="fas fa-edit me-1"></i> Edit</a>
                                                     <a class="btn btn-danger btn-xs" asp-action="Delete" asp-route-id="@item.CourseId"><i class="fas fa-trash me-1"></i> Delete</a>
@@ -94,10 +94,101 @@
                                     <th>Course</th>
                                     <th>Department</th>
                                     <th>University</th>
-                                    <th>Country</th>
-                                    <th>Band</th>
-                                    <th>Cost</th>
+                                    <th>Est.</th>
+                                    <th>Type</th>
                                     <th>Duration</th>
+                                    <th>Tuition Fees</th>
+                                    <th>Exams Accepted</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card card-lightblue">
+                    <div class="card-header">
+                        <h3 class="card-title">College Courses Report</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example_clg" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Department</th>
+                                    <th>University</th>
+                                    <th>Country</th>
+                                    <th>IELTS</th>
+                                    <th>GRE</th>
+                                    <th>TOEFL</th>
+                                    <th>SAT</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    if (@ViewBag.Colleges != null)
+                                    {
+                                        @foreach (var clg in @ViewBag.Colleges)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @clg.Course
+                                                </td>
+                                                <td>
+                                                    @clg.department.Department
+                                                </td>
+                                                <td>
+                                                    @clg.department.university.University
+                                                </td>
+                                                <td>
+                                                    @clg.department.university.country.CountryName
+                                                </td>
+                                                <td>@clg.IELTSBand</td>
+                                                <td>@clg.GREScore</td>
+                                                <td>@clg.TOEFLScore</td>
+                                                <td>@clg.SATScore</td>
+                                                <td>
+                                                    <a class="btn btn-warning btn-xs" asp-action="Edit" asp-route-id="@clg.CourseId"><i class="fas fa-edit me-1"></i> Edit</a>
+                                                    <a class="btn btn-danger btn-xs" asp-action="Delete" asp-route-id="@clg.CourseId"><i class="fas fa-trash me-1"></i> Delete</a>
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    }
+
+                                }
+
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Department</th>
+                                    <th>University</th>
+                                    <th>Country</th>
+                                    <th>IELTS</th>
+                                    <th>GRE</th>
+                                    <th>TOEFL</th>
+                                    <th>SAT</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

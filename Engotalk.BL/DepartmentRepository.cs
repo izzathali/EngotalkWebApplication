@@ -1,6 +1,7 @@
 ﻿using Engotalk.Data;
 using Engotalk.IBL;
 using Engotalk.Model;
+using Engotalk.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,29 @@ namespace Engotalk.BL
         {
             return await db.Departments.Where(i => i.UniversityId == univid && i.IsDeleted == false).ToListAsync();
 
+        }
+
+        public async Task<IEnumerable<DepartmentVM>> GetDepartmentsGroupByUniversityAndCountry()
+        {
+            var model = await db.Departments
+               .Where(i =>
+               i.IsDeleted == false &&
+               i.university.IsDeleted == false &&
+               i.university.country.IsDeleted == false
+               )
+               .GroupBy(o => new
+               {
+                   Country = o.university.country.CountryName,
+                   University = o.university.University
+               })
+               .Select(g => new DepartmentVM
+               {
+                   Country = g.Key.Country,
+                   University = g.Key.University
+               })
+               .ToListAsync();
+
+            return model;
         }
 
         public async Task<int> UpdateDepartment(DepartmentM department)

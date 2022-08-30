@@ -44,11 +44,11 @@ namespace Engotalk.WebApp.Controllers
         // POST: UniversityController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind("UniversityId,UniversityType,University,CountryId,Rank")] UniversityM universityM)
+        public async Task<ActionResult> Create([Bind("UniversityId,Type,UniversityType,University,CountryId,Rank,Location,Established,ExamsAccepted")] UniversityM universityM)
         {
             try
             {
-                if (universityM.UniversityType != "--SELECT--" && !String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
+                if (universityM.UniversityType != "--SELECT--" && universityM.Type != "--SELECT--" && !String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
                 {
                     await iUniversityRepository.AddUniversity(universityM);
                     _notyf.Success("University Saved Successfully!!", 5);
@@ -68,27 +68,35 @@ namespace Engotalk.WebApp.Controllers
         // GET: UniversityController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            ViewBag.Current = "UniversityReport";
-            ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
-
-            var university = await iUniversityRepository.GetUniversitiesByUniversityId(id);
-
-            if (university == null)
+            try
             {
-                return NotFound();
+                ViewBag.Current = "UniversityReport";
+                ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
+
+                var university = await iUniversityRepository.GetUniversitiesByUniversityId(id);
+
+                if (university == null)
+                {
+                    return NotFound();
+                }
+                return View(university);    
             }
-            return View(university);
+            catch (Exception ex)
+            {
+
+            }
+            return View();
         }
 
         // POST: UniversityController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, [Bind("UniversityId,UniversityType,University,CountryId,Rank")] UniversityM universityM)
+        public async Task<ActionResult> Edit(int id, [Bind("UniversityId,Type,UniversityType,University,CountryId,Rank,Location,Established,ExamsAccepted")] UniversityM universityM)
         {
             try
             {
 
-                if (universityM.UniversityType != "--SELECT--" && !String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
+                if (universityM.UniversityType != "--SELECT--" && universityM.Type != "--SELECT--" && !String.IsNullOrEmpty(universityM.University) && universityM.CountryId > 0)
                 {
                     await iUniversityRepository.UpdateUniversity(universityM);
                     _notyf.Success("University Updated Successfully", 5);

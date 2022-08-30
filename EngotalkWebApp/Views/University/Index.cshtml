@@ -14,12 +14,12 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <a asp-action="Create" class="btn btn-secondary">
-                    <span class="tf-icons fas fa-plus"></span>&nbsp; Add University
+                    <span class="tf-icons fas fa-plus"></span>&nbsp; Add Institute
                 </a>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">University</a></li>
+                    <li class="breadcrumb-item"><a href="#">Institute</a></li>
                     <li class="breadcrumb-item active">Report</li>
                 </ol>
             </div>
@@ -37,7 +37,7 @@
 
                 <div class="card card-lightblue">
                     <div class="card-header">
-                        <h3 class="card-title">University Report</h3>
+                        <h3 class="card-title">Institute Report</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -45,8 +45,12 @@
                             <thead>
                                 <tr>
                                     <th>Type</th>
-                                    <th>University</th>
+                                    <th>Institute</th>
+                                    <th>Inst. Type</th>
+                                    <th>Location</th>
                                     <th>Country</th>
+                                    <th>Est.</th>
+                                    <th>Exams Accepted</th>
                                     <th>Rank</th>
                                     <th>Action</th>
                                 </tr>
@@ -59,9 +63,13 @@
                                         @foreach (var item in @Model)
                                         {
                                             <tr>
-                                                <td>@item.UniversityType</td>
+                                                <td>@item.Type</td>
                                                 <td>@item.University</td>
+                                                <td>@item.UniversityType</td>
+                                                <td>@item.Location</td>
                                                 <td>@item.country?.CountryName</td>
+                                                <td>@item.Established</td>
+                                                <td>@item.ExamsAccepted</td>
                                                 <td>@item.Rank</td>
                                                 <td>
                                                     <a class="btn btn-warning btn-xs" asp-action="Edit" asp-route-id="@item.UniversityId"><i class="fas fa-edit me-1"></i> Edit</a> 

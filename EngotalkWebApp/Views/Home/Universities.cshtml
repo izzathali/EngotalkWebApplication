@@ -23,19 +23,23 @@
 </section>
 
 
-<div class="whole-wrap">
+<div class="whole-wrap member_counter">
     <div class="container ">
         <div class="body-tbl text-center">
 
             <table class="styled-table justify-content-center ">
-                <thead >
+                <thead>
                     <tr>
                         <th>#</th>
-                        <th>Institution</th>
-                        <th>IELTS Band</th>
-                        <th>Ranking (QS)</th>
-                        <th>Cost</th>
+                        <th>Name Of Institute</th>
+                        @*  <th>IELTS Band</th>
+                        <th>Ranking (QS)</th>*@
+                        <th>Location</th>
+                        <th>Established</th>
+                        <th>Type</th>
                         <th>Duration</th>
+                        <th>Tuition Fees</th>
+                        <th>Exams Accepted</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,10 +51,16 @@
                             <tr>
                                 <td>@no</td>
                                 <td>@item.University</td>
-                                <td>@item.Band</td>
-                                <td>@item.Rank</td>
-                                <td>@item.Cost</td>
+                                @*
+                        <td>@item.Band</td>
+                        <td>@item.Rank</td>
+                        *@
+                                <td>@item.Location</td>
+                                <td>@item.Established</td>
+                                <td>@item.Type</td>
                                 <td class="exper">@item.Duration</td>
+                                <td>@item.Cost</td>
+                                <td>@item.ExamsAccepted</td>
 
                             </tr>
 
@@ -65,7 +75,7 @@
     </div>
 </div>
 
-<section id="collegeid" class="special_cource">
+<section id="collegeid" class="special_cource padding_top">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-5">
@@ -76,41 +86,24 @@
             </div>
         </div>
 
-        <div class="row text-center">
-            <div class="col-md-3">
-                <a href="#collegeid" class="btn_1">IELTS SCORE</a>
-            </div>
-            <div class="col-md-3">
-                <a href="#collegeid" class="btn_1">TOEFL SCORE</a>
-            </div>
-            <div class="col-md-3">
-                <a href="#collegeid" class="btn_1">DET SCORE</a>
-            </div>
-            <div class="col-md-3">
-                <a href="#collegeid" class="btn_1">PTE SCORE</a>
-            </div>
-        </div>
     </div>
 </section>
 
 
-<div class="whole-wrap">
-    <div class="container">
+<div class="whole-wrap member_counter">
+    <div class="container" style="padding:0!important">
         <div class="body-tbl text-center">
 
             <table class="styled-table">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Univ & College</th>
-                        <th>IELTS Requirement</th>
-                        <th>Total IELTS Score</th>
-                        <th>Listening</th>
-                        <th>Reading</th>
-                        <th>Writing</th>
-                        <th>Speaking</th>
-                        <th>Cost</th>
-                        <th>Duration</th>
+                        <th>Name Of Institute</th>
+                        @*<th>IELTS Requirement</th>*@
+                        <th>IELTS</th>
+                        <th>GRE</th>
+                        <th>TOEFL</th>
+                        <th>SAT</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,15 +115,11 @@
                             <tr>
                                 <td>@no</td>
                                 <td>@item.College</td>
-                                <td>@item.IELTSRequirment</td>
-                                <td>@item.Band</td>
-                                <td>@item.ListeningBand</td>
-                                <td>@item.ReadingBand</td>
-                                <td>@item.WritingBand</td>
-                                <td>@item.SpeakingBand</td>
-                                <td>@item.Cost</td>
-                                <td class="exper">@item.Duration</td>
-
+                                @* <td>@item.IELTSRequirment</td>*@
+                                <td>@item.IELTSBand</td>
+                                <td>@item.GREScore</td>
+                                <td>@item.TOEFLlScore</td>
+                                <td>@item.SATScore</td>
                             </tr>
 
                             no++;
@@ -138,17 +127,6 @@
 
                     }
 
-                    @*  <tr class="active-row">
-                    <td>Melissa</td>
-                    <td>5150</td>
-                    <td class="exper">1.5</td>
-                    </tr>
-                    <tr class="active-row">
-                    <td>Martin</td>
-                    <td>9800</td>
-                    <td class="exper">14</td>
-                    </tr>*@
-                    <!-- and so on... -->
                 </tbody>
             </table>
         </div>

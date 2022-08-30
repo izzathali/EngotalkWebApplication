@@ -27,8 +27,10 @@ namespace Engotalk.WebApp.Controllers
         public async Task<ActionResult> Index()
         {
             ViewBag.Current = "CourseReport";
+            ViewBag.Colleges = await iCourseRepository.GetCoursesByInstituteType("College");
 
-            return View(await iCourseRepository.GetCourses());
+
+            return View(await iCourseRepository.GetCoursesByInstituteType("University"));
         }
 
         // GET: CourseController/Details/5
@@ -67,21 +69,22 @@ namespace Engotalk.WebApp.Controllers
         // POST: CourseController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind("Course,DepartmentId,Band,Cost,CourseDuration,IELTSRequirment,ListeningBand,ReadingBand,WritingBand,SpeakingBand")] CourseM courseM)
+        public async Task<ActionResult> Create([Bind("Course,DepartmentId,IELTSBand,Cost,CourseDuration,GREScore,TOEFLScore,SATScore")] CourseM courseM)
         {
 
-            if (courseM.DepartmentId > 0 && !String.IsNullOrEmpty(courseM.Band.ToString()) && !String.IsNullOrEmpty(courseM.Cost.ToString()) && !String.IsNullOrEmpty(courseM.CourseDuration))
+            try
             {
-                try
+                if (courseM.DepartmentId > 0 && !String.IsNullOrEmpty(courseM.Course))
                 {
                     await iCourseRepository.AddCourse(courseM);
-                    _notyf.Success("Course Saved Successfully!!", 5);
+                    _notyf.Success("Course Saved Successfully!!", 3);
 
                     return RedirectToAction(nameof(Index));
                 }
-                catch
-                {
-                }
+            }
+            catch
+            {
+                _notyf.Error("Somthing went wrong!!", 3);
             }
             ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
 
@@ -123,11 +126,11 @@ namespace Engotalk.WebApp.Controllers
         // POST: CourseController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, [Bind("CourseId,Course,DepartmentId,Band,Cost,CourseDuration,IELTSRequirment,ListeningBand,ReadingBand,WritingBand,SpeakingBand")] CourseM courseM)
+        public async Task<ActionResult> Edit(int id, [Bind("CourseId,Course,DepartmentId,IELTSBand,Cost,CourseDuration,GREScore,TOEFLScore,SATScore")] CourseM courseM)
         {
             try
             {
-                if (courseM.DepartmentId > 0 && !String.IsNullOrEmpty(courseM.Band.ToString()) && !String.IsNullOrEmpty(courseM.Cost.ToString()) && !String.IsNullOrEmpty(courseM.CourseDuration))
+                if (courseM.DepartmentId > 0 && !String.IsNullOrEmpty(courseM.Course))
                 {
                     await iCourseRepository.UpdateCourse(courseM);
                     _notyf.Success("Course Updated Successfully!!", 5);
@@ -137,6 +140,7 @@ namespace Engotalk.WebApp.Controllers
             }
             catch
             {
+                _notyf.Error("Somthing went wrong!!", 3);
             }
             ViewData["CountryId"] = new SelectList(await iCountryRepository.GetCountriesAsync(), "CountryId", "CountryName");
             return View(courseM);
