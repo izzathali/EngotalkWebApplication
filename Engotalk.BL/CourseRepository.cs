@@ -101,7 +101,7 @@ namespace Engotalk.BL
                     Course = g.Key.Course
                 })
                 .ToListAsync();
-
+            
             return model;
         }
 

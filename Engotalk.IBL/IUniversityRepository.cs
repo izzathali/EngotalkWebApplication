@@ -20,6 +20,7 @@ namespace Engotalk.IBL
         public Task<IEnumerable<UniversityM>> GetUniversitiesOrderByLastAdded();
 
         public Task<IEnumerable<UniversityVM>> GetUniversitiesByCountryIdAndCourse(int cid,string course);
+        public Task<IEnumerable<InstituteVM>> GetInstituteByCountryIdAndCourse(int cid,string course);
         public Task<IEnumerable<CollegeVM>> GetCollegesByCountryIdAndCourse(int cid,string course);
 
         public Task<int> UpdateUniversity(UniversityM university);

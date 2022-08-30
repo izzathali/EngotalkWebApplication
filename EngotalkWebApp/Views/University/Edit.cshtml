@@ -103,50 +103,48 @@
                                     </div>
                                 </div>
 
-                                <div id="univ_fields" style="display:@visibility;">
 
-                                    <div class="row">
+                                <div class="row">
 
-                                        <div class="col-md-4">
+                                    <div class="col-md-4">
 
-                                            <div class="form-group">
-                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                <label for="exampleInputEmail1">Location</label>
-                                                <span asp-validation-for="Location" class="text-danger"></span>
+                                        <div class="form-group">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <label for="exampleInputEmail1">Location</label>
+                                            <span asp-validation-for="Location" class="text-danger"></span>
 
-                                                <input asp-for="Location"
-                                                       type="text" class="form-control" id="exampleInputEmail1" placeholder="Location City">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-
-                                            <div class="form-group">
-                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                <label for="exampleInputEmail1">Established</label>
-                                                <span asp-validation-for="Established" class="text-danger"></span>
-
-                                                <input asp-for="Established"
-                                                       type="text" class="form-control" id="exampleInputEmail1" placeholder="Established">
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-4">
-
-                                            <div class="form-group">
-
-                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                <label for="exampleInputEmail1">ExamsAccepted</label>
-                                                <span asp-validation-for="ExamsAccepted" class="text-danger"></span>
-
-                                                <input asp-for="ExamsAccepted"
-                                                       type="text" class="form-control" id="exampleInputEmail1" placeholder="Exams Accepted">
-                                            </div>
-
+                                            <input asp-for="Location"
+                                                   type="text" class="form-control" id="exampleInputEmail1" placeholder="Location City">
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
 
+                                        <div class="form-group">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <label for="exampleInputEmail1">Established</label>
+                                            <span asp-validation-for="Established" class="text-danger"></span>
 
+                                            <input asp-for="Established"
+                                                   type="text" class="form-control" id="exampleInputEmail1" placeholder="Established">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <label for="exampleInputEmail1">ExamsAccepted</label>
+                                            <span asp-validation-for="ExamsAccepted" class="text-danger"></span>
+
+                                            <input asp-for="ExamsAccepted"
+                                                   type="text" class="form-control" id="exampleInputEmail1" placeholder="Exams Accepted">
+                                        </div>
+
+                                    </div>
                                 </div>
+
+
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -183,17 +181,6 @@
 
         $(document).ready(function() {
 
-            $("#inst_type").change(function() {
-                var InstType = $('#inst_type').val();
-
-                if (InstType == "University") {
-                    $("#univ_fields").show();
-                } else {
-                    $("#univ_fields").hide();
-                }
-
-                return false;
-            })
 
         })
 

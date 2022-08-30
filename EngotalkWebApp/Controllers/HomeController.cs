@@ -34,11 +34,11 @@ namespace EngotalkWebApp.Controllers
         public async Task<IActionResult> Universities(int cid,string course)
         {
             ViewBag.Course = course;
-            var model = await iUniversityRepository.GetUniversitiesByCountryIdAndCourse(cid,course);
-            ViewBag.Universities = model;
+            var model = await iUniversityRepository.GetInstituteByCountryIdAndCourse(cid,course);
+            ViewBag.Institutes = model;
 
-            var colleges = await iUniversityRepository.GetCollegesByCountryIdAndCourse(cid, course);
-            ViewBag.Colleges = colleges;
+            //var colleges = await iUniversityRepository.GetCollegesByCountryIdAndCourse(cid, course);
+            //ViewBag.Colleges = colleges;
 
             return View();
         }

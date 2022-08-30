@@ -27,10 +27,10 @@ namespace Engotalk.WebApp.Controllers
         public async Task<ActionResult> Index()
         {
             ViewBag.Current = "CourseReport";
-            ViewBag.Colleges = await iCourseRepository.GetCoursesByInstituteType("College");
+            //ViewBag.Colleges = await iCourseRepository.GetCoursesByInstituteType("College");
 
 
-            return View(await iCourseRepository.GetCoursesByInstituteType("University"));
+            return View(await iCourseRepository.GetCourses());
         }
 
         // GET: CourseController/Details/5

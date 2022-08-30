@@ -1,8 +1,7 @@
 ﻿@using Engotalk.ViewModel
 @{
     ViewData["Title"] = "Universities";
-    IEnumerable<UniversityVM> universitiesVM = ViewBag.Universities as IEnumerable<UniversityVM>;
-    IEnumerable<CollegeVM> collegeVM = ViewBag.colleges as IEnumerable<CollegeVM>;
+    IEnumerable<InstituteVM> InstitutesVM = ViewBag.Institutes as IEnumerable<InstituteVM>;
 }
 <link rel="stylesheet" href="~/css/UnivStyle.css" asp-append-version="true" />
 
@@ -15,7 +14,7 @@
             <div class="col-xl-5">
                 <div class="section_tittle text-center">
                     <p>@ViewBag.Course</p>
-                    <h2>Universities</h2>
+                    <h2>Institutes</h2>
                 </div>
             </div>
         </div>
@@ -32,8 +31,6 @@
                     <tr>
                         <th>#</th>
                         <th>Name Of Institute</th>
-                        @*  <th>IELTS Band</th>
-                        <th>Ranking (QS)</th>*@
                         <th>Location</th>
                         <th>Established</th>
                         <th>Type</th>
@@ -43,19 +40,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (universitiesVM != null)
+                    @if (InstitutesVM != null)
                     {
                         int no = 1;
-                        @foreach (var item in @universitiesVM)
+                        @foreach (var item in @InstitutesVM)
                         {
                             <tr>
                                 <td>@no</td>
                                 <td>@item.University</td>
-                                @*
-                        <td>@item.Band</td>
-                        <td>@item.Rank</td>
-                        *@
-                                <td>@item.Location</td>
+                                <td>@item.Location, @item.Country </td>
                                 <td>@item.Established</td>
                                 <td>@item.Type</td>
                                 <td class="exper">@item.Duration</td>
@@ -81,7 +74,7 @@
             <div class="col-xl-5">
                 <div class="section_tittle text-center">
                     <p>@ViewBag.Course</p>
-                    <h2>Colleges</h2>
+                    <h2>Exam Scores</h2>
                 </div>
             </div>
         </div>
@@ -107,14 +100,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (collegeVM != null)
+                    @if (InstitutesVM != null)
                     {
                         int no = 1;
-                        @foreach (var item in @collegeVM)
+                        @foreach (var item in @InstitutesVM)
                         {
                             <tr>
                                 <td>@no</td>
-                                <td>@item.College</td>
+                                <td>@item.University</td>
                                 @* <td>@item.IELTSRequirment</td>*@
                                 <td>@item.IELTSBand</td>
                                 <td>@item.GREScore</td>

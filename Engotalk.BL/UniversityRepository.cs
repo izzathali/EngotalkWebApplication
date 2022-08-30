@@ -59,6 +59,30 @@ namespace Engotalk.BL
             return model;
         }
 
+        public async Task<IEnumerable<InstituteVM>> GetInstituteByCountryIdAndCourse(int cid, string course)
+        {
+            var model = await db.Courses
+                .Where(i => i.IsDeleted == false && i.department.university.country.IsDeleted == false && i.department.university.CountryId == cid && i.Course == course)
+                .Select(g => new InstituteVM
+                {
+                    University = g.department.university.University,
+                    Location = g.department.university.Location,
+                    Country = g.department.university.country.CountryName,
+                    Established = g.department.university.Established,
+                    Type = g.department.university.Type,
+                    Cost = g.Cost,
+                    Duration = g.CourseDuration,
+                    ExamsAccepted = g.department.university.ExamsAccepted,
+                    IELTSBand = g.IELTSBand,
+                    GREScore = g.GREScore,
+                    TOEFLlScore = g.TOEFLScore,
+                    SATScore = g.SATScore
+                })
+                .ToListAsync();
+
+            return model;
+        }
+
         public async Task<IEnumerable<UniversityM>> GetUniversities()
         {
             return await db.Universities

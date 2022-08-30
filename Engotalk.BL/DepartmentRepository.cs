@@ -69,12 +69,13 @@ namespace Engotalk.BL
                .GroupBy(o => new
                {
                    Country = o.university.country.CountryName,
-                   University = o.university.University
+                   Unversity = o.university.University
                })
                .Select(g => new DepartmentVM
                {
                    Country = g.Key.Country,
-                   University = g.Key.University
+                   University = g.Key.Unversity
+                  
                })
                .ToListAsync();
 
