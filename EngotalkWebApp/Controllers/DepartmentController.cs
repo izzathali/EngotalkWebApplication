@@ -23,6 +23,8 @@ namespace Engotalk.WebApp.Controllers
         public async Task<ActionResult> Index()
         {
             ViewBag.Current = "DepartmentReport";
+            ViewBag.Departments = await iDepartmentRepository.GetDepartmentsGroupByUniversityAndCountry();
+
             return View(await iDepartmentRepository.GetDepartments());
         }
 

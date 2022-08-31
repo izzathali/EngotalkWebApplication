@@ -18,5 +18,6 @@ namespace Engotalk.Model
         public int UniversityId { get; set; }
         public UniversityM? university { get; set; }
         public bool IsDeleted { get; set; }
+        public ICollection<CourseM> courses { get; set; }
     }
 }

@@ -29,6 +29,7 @@ namespace Engotalk.WebApp.Controllers
             ViewBag.Current = "CourseReport";
             //ViewBag.Colleges = await iCourseRepository.GetCoursesByInstituteType("College");
 
+            ViewBag.Country = await iCourseRepository.GetCoursesGroupByCountryAndUniversityAndDepartment();
 
             return View(await iCourseRepository.GetCourses());
         }

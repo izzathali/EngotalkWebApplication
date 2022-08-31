@@ -80,6 +80,34 @@ namespace Engotalk.BL
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<CountryM>> GetCoursesGroupByCountryAndUniversityAndDepartment()
+        {
+            var model = await db.Courses
+               .Where(i =>
+               i.IsDeleted == false &&
+               i.department.IsDeleted == false &&
+               i.department.university.IsDeleted == false &&
+               i.department.university.country.IsDeleted == false
+               )
+               .GroupBy(o => new
+               {
+                   Country = o.department.university.country.CountryName,
+                   Unversity = o.department.university.University
+               })
+               .Select(g => new CountryM
+               {
+                   CountryName = g.Key.Country,
+                   universities = g.Select(u => new UniversityM
+                   {
+                       University = g.Key.Unversity
+                   }).ToList(),
+                 
+               })
+               .ToListAsync();
+
+            return model;
+        }
+
         public async Task<IEnumerable<DepartmentVM>> GetDepartmentWithCourse(int CountryId)
         {
             var model = await db.Courses

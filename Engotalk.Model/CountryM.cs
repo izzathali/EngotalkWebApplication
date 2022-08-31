@@ -16,7 +16,7 @@ namespace Engotalk.Model
         [Display(Name = "Country ")]
         public string CountryName { get; set; } = string.Empty;
         public bool IsDeleted { get; set; }
-        public ICollection<UniversityM> universities { get; set; }
+        public List<UniversityM> universities { get; set; }
 
     }
 }

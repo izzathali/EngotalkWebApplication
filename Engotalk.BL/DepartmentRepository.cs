@@ -74,8 +74,13 @@ namespace Engotalk.BL
                .Select(g => new DepartmentVM
                {
                    Country = g.Key.Country,
-                   University = g.Key.Unversity
-                  
+                   University = g.Key.Unversity,
+                   DepartmentList = g.Select(d =>
+                   new DepartmentVM
+                   {
+                       DepartmentId = d.DepartmentId,
+                       Department= d.Department
+                   }).ToList()
                })
                .ToListAsync();
 

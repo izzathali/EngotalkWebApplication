@@ -1,9 +1,12 @@
 ﻿@using Engotalk.Model
+@using Engotalk.ViewModel
 @model IEnumerable<DepartmentM>
 
 @{
     ViewData["Title"] = "Department Report";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+
+    IEnumerable<DepartmentVM> Departments = ViewBag.Departments as IEnumerable<DepartmentVM>;
 }
 
 
@@ -27,6 +30,113 @@
     </div><!-- /.container-fluid -->
 </section>
 
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-lightblue">
+                    <div class="card-header ">
+                        <h3 class="card-title">Country and Institute-wise Department Report</h3>
+                    </div>
+                    <!-- ./card-header -->
+                    <div class="card-body p-0">
+                        <table class="table table-hover">
+                            <tbody>
+                                @if (Departments != null)
+                                {
+                                    @foreach (var group in Departments.GroupBy(d => d.Country))
+                                    {
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                            <td>
+                                                <button type="button" class="btn btn-primary p-0">
+                                                    <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                                </button>
+                                                @group.Key
+                                                <cite class="pull-right" title="Source Title">
+                                                    <i class="nav-icon fa fa-flag"></i>
+                                                    Country
+                                                </cite>
+                                            </td>
+                                        </tr>
+                                        <tr class="expandable-body">
+                                            <td>
+                                                <div class="p-0">
+                                                    <table class="table table-hover">
+                                                        <tbody>
+                                                            @foreach (var unv in group.GroupBy(x => x.University))
+                                                            {
+
+                                                                <tr data-widget="expandable-table" aria-expanded="false">
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-warning p-0">
+                                                                            <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                                                        </button>
+                                                                        @unv.Key
+
+                                                                        <cite class="pull-right" title="Source Title">
+                                                                            <i class="nav-icon fa fa-university"></i>
+                                                                            Institute
+                                                                        </cite>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="expandable-body">
+                                                                    <td>
+                                                                        <div class="p-0 card card-warning card-outline">
+                                                                            <table class="table table-hover table-striped table-sm">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th style="width: 10px">#</th>
+                                                                                        <th>Department of @unv.Key</th>
+                                                                                        <th style="width: 150px">Action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+
+                                                                                    @{
+                                                                                        int no_dept = 1;
+                                                                                    }
+                                                                                    @foreach (var item in unv.SelectMany(d => d.DepartmentList))
+                                                                                    {
+                                                                                        <tr>
+                                                                                            <td>@no_dept</td>
+                                                                                            <td>@item.Department</td>
+                                                                                            @*<td><span class="badge bg-danger">@item.DepartmentId%</span></td>*@
+                                                                                            <td>
+                                                                                                <a class="btn btn-warning btn-xs" asp-action="Edit" asp-route-id="@item.DepartmentId"><i class="fas fa-edit me-1"></i> Edit</a>
+                                                                                                <a class="btn btn-danger btn-xs" asp-action="Delete" asp-route-id="@item.DepartmentId"><i class="fas fa-trash me-1"></i> Delete</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        no_dept++;
+                                                                                    }
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+
+                                                                
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</section>
 
 <!-- Main content -->
 <section class="content">
