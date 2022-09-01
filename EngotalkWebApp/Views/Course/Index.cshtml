@@ -1,11 +1,12 @@
 ﻿@using Engotalk.Model
+@using Engotalk.ViewModel
 @model IEnumerable<CourseM>
 
 @{
     ViewData["Title"] = "Course Report";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 
-    IEnumerable<CountryM> Countries = ViewBag.Country as IEnumerable<CountryM>;
+    IEnumerable<CourseVM> Courses = ViewBag.Country as IEnumerable<CourseVM>;
 }
 
 
@@ -29,6 +30,189 @@
     </div><!-- /.container-fluid -->
 </section>
 
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-lightblue">
+                    <div class="card-header ">
+                        <h3 class="card-title">Course Report | Grouped</h3>
+                    </div>
+                    <!-- ./card-header -->
+                    <div class="card-body p-0">
+                        <table class="table table-hover">
+                            <tbody>
+                                @if (Courses != null)
+                                {
+                                    @foreach (var group in Courses.GroupBy(d => d.Country))
+                                    {
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                            <td>
+                                                <button type="button" class="btn btn-primary p-0">
+                                                    <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                                </button>
+                                                @group.Key
+                                                <cite class="pull-right" title="Source Title">
+                                                    <i class="nav-icon fa fa-flag"></i>
+                                                    Country
+                                                </cite>
+                                            </td>
+                                        </tr>
+                                        <tr class="expandable-body">
+                                            <td>
+                                                <div class="p-0">
+                                                    <table class="table table-hover ">
+                                                        <tbody>
+                                                            @foreach (var unv in group.GroupBy(x => x.Univ.University))
+                                                            {
+                                                                @foreach (var est in unv.GroupBy(x => x.Univ.Established))
+                                                                {
+                                                                    @foreach (var loc in est.GroupBy(x => x.Univ.Location))
+                                                                    {
+
+                                                                        @foreach (var exm in loc.GroupBy(x => x.Univ.ExamsAccepted))
+                                                                        {
+
+
+                                                                            <tr data-widget="expandable-table" aria-expanded="false">
+                                                                                <td>
+                                                                                    <div class="row p-0 m-0">
+                                                                                        <div class="col-md-4 p-0">
+                                                                                            <button type="button" class="btn btn-danger p-0">
+                                                                                                <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                                                                            </button>
+                                                                                            @unv.Key
+                                                                                        </div>
+                                                                                        <div class="col-md-2 p-0">
+                                                                                            <strong>
+                                                                                                Exam:
+                                                                                            </strong>
+                                                                                            @exm.Key
+                                                                                        </div>
+                                                                                        <div class="col-md-2 p-0">
+                                                                                            <strong>
+                                                                                                Loc:
+                                                                                            </strong>
+                                                                                            @loc.Key
+                                                                                        </div>
+                                                                                        <div class="col-md-2 p-0">
+                                                                                            <strong>
+                                                                                                Est.:
+                                                                                            </strong>
+                                                                                            @est.Key
+                                                                                        </div>
+                                                                                        <div class="col-md-2 p-0">
+                                                                                            <cite class="pull-right" title="Source Title">
+                                                                                                <i class="nav-icon fa fa-university"></i>
+                                                                                                Institute
+                                                                                            </cite>
+                                                                                        </div>
+                                                                                    </div>
+
+
+
+                                                                                </td>
+                                                                            </tr>
+
+
+                                                                            <tr class="expandable-body">
+                                                                                <td>
+                                                                                    <div class="p-0 callout callout-danger">
+                                                                                        <table class="table table-hover">
+                                                                                            <tbody>
+                                                                                                @foreach (var dept in exm.GroupBy(d => d.Department))
+                                                                                                {
+                                                                                                    <tr data-widget="expandable-table" aria-expanded="false">
+                                                                                                        <td>
+                                                                                                            <button type="button" class="btn btn-warning p-0">
+                                                                                                                <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                                                                                            </button>
+                                                                                                            @dept.Key
+
+                                                                                                            <cite class="pull-right" title="Source Title">
+                                                                                                                <i class="nav-icon fa fa-building"></i>
+                                                                                                                Department
+                                                                                                            </cite>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr class="expandable-body">
+                                                                                                        <td>
+                                                                                                            <div class="p-0 card card-warning  card-outline">
+                                                                                                                <table class="table table-hover table-striped table-sm">
+                                                                                                                    <thead>
+                                                                                                                        <tr>
+                                                                                                                            <th style="width: 10px">#</th>
+                                                                                                                            <th>Courses of @dept.Key</th>
+                                                                                                                            <th>IELTS</th>
+                                                                                                                            <th>GRE</th>
+                                                                                                                            <th>TOEFL</th>
+                                                                                                                            <th>SAT</th>
+                                                                                                                            <th>Duration</th>
+                                                                                                                            <th>Fees</th>
+                                                                                                                            <th style="width: 150px">Action</th>
+                                                                                                                        </tr>
+                                                                                                                    </thead>
+                                                                                                                    <tbody>
+
+                                                                                                                        @{
+                                                                                                                            int no_crs = 1;
+                                                                                                                        }
+                                                                                                                        @foreach (var course in dept.SelectMany(d => d.courses))
+                                                                                                                        {
+                                                                                                                            <tr>
+                                                                                                                                <td>@no_crs</td>
+                                                                                                                                <td>@course.Course</td>
+                                                                                                                                <td>@course.IELTSBand</td>
+                                                                                                                                <td>@course.GREScore</td>
+                                                                                                                                <td>@course.TOEFLScore</td>
+                                                                                                                                <td>@course.SATScore</td>
+                                                                                                                                <td>@course.CourseDuration</td>
+                                                                                                                                <td>@course.Cost</td>
+                                                                                                                                <td>
+                                                                                                                                    <a class="btn btn-warning btn-xs" asp-action="Edit" asp-route-id="@course.CourseId"><i class="fas fa-edit me-1"></i> Edit</a>
+                                                                                                                                    <a class="btn btn-danger btn-xs" style="color:white;" asp-action="Delete" asp-route-id="@course.CourseId"><i class="fas fa-trash me-1"></i> Delete</a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                            no_crs++;
+                                                                                                                        }
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+
+                                                                                                }
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</section>
 
 <!-- Main content -->
 <section class="content">
@@ -125,77 +309,3 @@
     <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
-<!-- Main content -->
-<section class="content">
-    <div class="container-fluid">
-
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-lightblue">
-                    <div class="card-header ">
-                        <h3 class="card-title">Course Report</h3>
-                    </div>
-                    <!-- ./card-header -->
-                    <div class="card-body p-0">
-                        <table class="table table-hover">
-                            <tbody>
-                                @if (Countries != null)
-                                {
-                                    @foreach (var group in Countries.GroupBy(d => d.CountryName))
-                                    {
-                                        <tr data-widget="expandable-table" aria-expanded="false">
-                                            <td>
-                                                <button type="button" class="btn btn-primary p-0">
-                                                    <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
-                                                </button>
-                                                @group.Key
-                                                <cite class="pull-right" title="Source Title">
-                                                    <i class="nav-icon fa fa-flag"></i>
-                                                    Country
-                                                </cite>
-                                            </td>
-                                        </tr>
-                                        <tr class="expandable-body">
-                                            <td>
-                                                <div class="p-0">
-                                                    <table class="table table-hover">
-                                                        <tbody>
-                                                            @foreach (var unv in group.GroupBy(x => x.universities.SelectMany(x =>x.University)))
-                                                            {
-
-                                                                <tr data-widget="expandable-table" aria-expanded="false">
-                                                                    <td>
-                                                                        <button type="button" class="btn btn-warning p-0">
-                                                                            <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
-                                                                        </button>
-                                                                        @unv.Key
-
-                                                                        <cite class="pull-right" title="Source Title">
-                                                                            <i class="nav-icon fa fa-university"></i>
-                                                                            Institute
-                                                                        </cite>
-                                                                    </td>
-                                                                </tr>
-                                                                
-
-
-                                                            }
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    }
-
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-        </div>
-
-    </div><!-- /.container-fluid -->
-</section>

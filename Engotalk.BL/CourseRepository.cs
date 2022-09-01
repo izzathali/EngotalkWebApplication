@@ -52,11 +52,11 @@ namespace Engotalk.BL
         public async Task<IEnumerable<CourseM>> GetCourses()
         {
             return await db.Courses
-                .Where(u => 
+                .Where(u =>
                 u.IsDeleted == false &&
                 u.department.IsDeleted == false &&
                 u.department.university.IsDeleted == false &&
-                u.department.university.country.IsDeleted == false 
+                u.department.university.country.IsDeleted == false
                 )
                 .Include(o => o.department)
                 .Include(o => o.department.university)
@@ -80,63 +80,80 @@ namespace Engotalk.BL
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<CountryM>> GetCoursesGroupByCountryAndUniversityAndDepartment()
+        public async Task<IEnumerable<CourseVM>> GetCoursesGroupByCountryAndUniversityAndDepartment()
         {
             var model = await db.Courses
-               .Where(i =>
-               i.IsDeleted == false &&
-               i.department.IsDeleted == false &&
-               i.department.university.IsDeleted == false &&
-               i.department.university.country.IsDeleted == false
+               .Where(u =>
+                u.IsDeleted == false &&
+                u.department.IsDeleted == false &&
+                u.department.university.IsDeleted == false &&
+                u.department.university.country.IsDeleted == false
                )
                .GroupBy(o => new
                {
                    Country = o.department.university.country.CountryName,
-                   Unversity = o.department.university.University
+                   University = o.department.university.University,
+                   Location = o.department.university.Location,
+                   Established = o.department.university.Established,
+                   ExamsAccepted = o.department.university.ExamsAccepted,
+                   Department = o.department.Department,
                })
-               .Select(g => new CountryM
+               .Select(g => new CourseVM
                {
-                   CountryName = g.Key.Country,
-                   universities = g.Select(u => new UniversityM
+                   Country = g.Key.Country,
+                   Univ = g.Select(u => new UniversityVM
                    {
-                       University = g.Key.Unversity
-                   }).ToList(),
-                 
-               })
-               .ToListAsync();
+                       University = g.Key.University,
+                       Location = g.Key.Location,
+                       Established = g.Key.Established,
+                       ExamsAccepted = g.Key.ExamsAccepted
+                   }).SingleOrDefault(),
+                   Department = g.Key.Department,
+                   courses = g.Select(i => new CourseVM
+                   {
+                       CourseId = i.CourseId,
+                       Course = i.Course,
+                       GREScore = i.GREScore,
+                       IELTSBand = i.IELTSBand,
+                       TOEFLScore = i.TOEFLScore,
+                       SATScore = i.SATScore,
+                       CourseDuration = i.CourseDuration,
+                       Cost = i.Cost
+                   }).ToList()
+               }).ToListAsync();
 
             return model;
         }
 
-        public async Task<IEnumerable<DepartmentVM>> GetDepartmentWithCourse(int CountryId)
-        {
-            var model = await db.Courses
-                .Where(i => 
-                i.IsDeleted == false && 
-                i.department.IsDeleted == false &&
-                i.department.university.IsDeleted == false &&
-                i.department.university.country.IsDeleted == false &&
-                i.department.university.CountryId == CountryId 
-                )
-                .GroupBy(o => new
-                {
-                    Department = o.department.Department,
-                    Course = o.Course
-                })
-                .Select(g => new DepartmentVM
-                {
-                    Department = g.Key.Department,
-                    Course = g.Key.Course
-                })
-                .ToListAsync();
-            
-            return model;
-        }
+    public async Task<IEnumerable<DepartmentVM>> GetDepartmentWithCourse(int CountryId)
+    {
+        var model = await db.Courses
+            .Where(i =>
+            i.IsDeleted == false &&
+            i.department.IsDeleted == false &&
+            i.department.university.IsDeleted == false &&
+            i.department.university.country.IsDeleted == false &&
+            i.department.university.CountryId == CountryId
+            )
+            .GroupBy(o => new
+            {
+                Department = o.department.Department,
+                Course = o.Course
+            })
+            .Select(g => new DepartmentVM
+            {
+                Department = g.Key.Department,
+                Course = g.Key.Course
+            })
+            .ToListAsync();
 
-        public async Task<int> UpdateCourse(CourseM course)
-        {
-            db.Courses.Update(course);
-            return await db.SaveChangesAsync();
-        }
+        return model;
     }
+
+    public async Task<int> UpdateCourse(CourseM course)
+    {
+        db.Courses.Update(course);
+        return await db.SaveChangesAsync();
+    }
+}
 }
