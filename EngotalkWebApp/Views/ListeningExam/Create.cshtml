@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Add Listening Exam";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <button type="button" id="btnTextbox" class="btn btn-primary">Add Textbox</button>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Text Editors</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-info">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Summernote
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <textarea id="summernote">
+                Place <em>some</em> <u>text</u> <strong>here</strong>
+              </textarea>
+                </div>
+                <div class="card-footer">
+                    Visit <a>Summernote</a> Footer.
+                </div>
+            </div>
+        </div>
+        <!-- /.col-->
+    </div>
+    <!-- ./row -->
+
+</section>
+<!-- /.content -->
+@section Scripts{
+    <script>
+        $('#btnTextbox').click(function() {
+            //var html = $('#summernote').summernote('code');
+            var $txt = jQuery("#summernote");
+            var caretPos = $txt[0].selectionStart;
+            var textAreaTxt = $txt.val();
+            var txtToAdd = "stuff";
+            $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));
+            alert("df");
+        });
+    </script>
+}
